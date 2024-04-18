@@ -24,7 +24,7 @@
                     @endif
                 @else
                     <li class="relative">
-                        <a id="navbarDropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
+                        <a id="navbarDropdown" href="/moncompte" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }}
                         </a>
 
