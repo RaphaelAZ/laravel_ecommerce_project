@@ -5,14 +5,14 @@
     <div>
         <div>
             <div>
-                <div>{{ __('Inscription') }}</div>
+                <div>{{ __('Register') }}</div>
 
                 <div>
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
                         <div>
-                            <label for="name">{{ __('Nom') }}</label>
+                            <label for="name">{{ __('Username') }}</label>
 
                             <div>
                                 <input id="name" type="text" class="@error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -24,7 +24,7 @@
                         </div>
 
                         <div>
-                            <label for="email">{{ __('E-mail') }}</label>
+                            <label for="email">{{ __('Email') }}</label>
 
                             <div>
                                 <input id="email" type="email" class="@error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
@@ -36,7 +36,7 @@
                         </div>
 
                         <div>
-                            <label for="address">{{ __('Adresse') }}</label>
+                            <label for="address">{{ __('Address') }}</label>
 
                             <div>
                                 <input id="address" type="text" class="@error('adresse') is-invalid @enderror" name="address" required autocomplete="address">
@@ -48,7 +48,7 @@
                         </div>
 
                         <div>
-                            <label for="city">{{ __('Ville') }}</label>
+                            <label for="city">{{ __('City') }}</label>
 
                             <div>
                                 <input id="city" type="text" class="@error('city') is-invalid @enderror" name="city" required autocomplete="city">
@@ -60,7 +60,7 @@
                         </div>
 
                         <div>
-                            <label for="zipcode">{{ __('Code Postal') }}</label>
+                            <label for="zipcode">{{ __('Zip Code') }}</label>
 
                             <div>
                                 <input id="zipcode" type="text" class="@error('zipcode') is-invalid @enderror" name="zipcode" required autocomplete="zipcode">
@@ -72,7 +72,7 @@
                         </div>
 
                         <div>
-                            <label for="phone">{{ __('Téléphone') }}</label>
+                            <label for="phone">{{ __('Phone') }}</label>
 
                             <div>
                                 <input id="phone" type="text" class="@error('phone') is-invalid @enderror" name="phone" required autocomplete="phone">
@@ -84,7 +84,7 @@
                         </div>
 
                         <div>
-                            <label for="password">{{ __('Mot de passe') }}</label>
+                            <label for="password">{{ __('Password') }}</label>
 
                             <div>
                                 <input id="password" type="password" class="@error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
@@ -104,7 +104,7 @@
                         </div>
 
                         <div>
-                            <button type="submit">{{ __('S\'inscrire') }}</button>
+                            <button type="submit">{{ __('Register') }}</button>
                         </div>
                     </form>
                 </div>
