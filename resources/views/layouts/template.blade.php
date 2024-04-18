@@ -21,8 +21,8 @@
     @yield('styles')
 </head>
 <body>
+    @include('layouts.navbar')
     <div id="app">
-        @include('layout.navbar')
         <main class="py-4">
             @yield('content')
         </main>
