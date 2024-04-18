@@ -21,7 +21,7 @@ class ProduitFactory extends Factory
         ];
 
         return [
-            'nom' => $this->faker->words(random_int(1, 3)),
+            'nom' => $this->faker->words(random_int(1, 3), true),
             'description' => $this->faker->paragraph(),
             'prix' => $this->faker->randomFloat(2, 5, 100),
             'image' => $this->faker->imageUrl(),

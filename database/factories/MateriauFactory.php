@@ -16,7 +16,7 @@ class MateriauFactory extends Factory
     public function definition(): array
     {
         return [
-            "libelle" => $this->faker->words(random_int(1, 3)),
+            "libelle" => $this->faker->word(),
         ];
     }
 }

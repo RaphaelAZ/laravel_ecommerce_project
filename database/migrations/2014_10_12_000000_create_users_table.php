@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('address');
             $table->string('zipcode');
             $table->string('city');
-            $table->integer('phone');
+            $table->string('phone', 125);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
