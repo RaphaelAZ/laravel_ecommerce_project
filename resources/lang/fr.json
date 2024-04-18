@@ -2,7 +2,7 @@
     "Email Address": "Adresse email",
     "Password": "Mot de passe",
     "Remember Me": "Se souvenir de moi",
-    "Forgot Your Password?": "Mot de passe oublié ?",
+    "Forgot Your Password?": "Mot de passe oublié?",
     "Sign In": "Se connecter",
     "Login": "Se connecter",
     "Sign Up": "S'inscrire",
@@ -13,5 +13,14 @@
     "City": "Ville",
     "Zip Code": "Code postal",
     "Phone": "Téléphone",
-    "Confirm Password": "Confirmer le mot de de passe"
+    "Confirm Password": "Confirmer le mot de de passe",
+    "Verify Your Email Address": "Vérifiez votre adresse e-mail",
+    "A fresh verification link has been sent to your email address.": "Un lien de vérification a vous a été envoyé par mail.",
+    "Before proceeding, please check your email for a verification link.": "Avant de pouvoir continuer, veuillez vérifier votre boîte mail pour le lien de vérification",
+    "If you did not receive the email": "Si vous n'avez pas reçu l'email",
+    "click here to request another": "Cliquez ici pour demander un autre lien",
+    "If you received this email in error, please contact us": "Si vous avez reçu cet email par erreur, veuillez nous contacter.",
+    "Please confirm your password before continuing.": "Veuillez confirmer votre mot de passe avant de continuer",
+    "Reset Password": "Réinitialiser le mot de passe",
+    "Send Password Reset Link": "Envoyer le lien de réinitialisation de mot de passe"
 }
