@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Materiau;
 use Illuminate\Database\Seeder;
 
 class MateriauSeeder extends Seeder
@@ -13,6 +14,6 @@ class MateriauSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Materiau::factory(50)->create();
     }
 }
