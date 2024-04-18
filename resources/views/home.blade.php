@@ -1,7 +1,7 @@
 @extends('layouts.template')
 
 @section('content')
-    <div class="container">
+    <div>
         <p>Page d'accueil</p>
     </div>
 @stop
