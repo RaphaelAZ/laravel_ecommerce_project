@@ -1,7 +1,7 @@
 @extends('home')
 
 @section('content')
-<div class="container mx-auto">
+<div>
     <div>
         <div>
             <div>
@@ -99,7 +99,7 @@
                             <label for="password-confirm">{{ __('Confirm Password') }}</label>
 
                             <div>
-                                <input id="password-confirm" type="password" class="" name="password_confirmation" required autocomplete="new-password">
+                                <input id="password-confirm" type="password" class="@error('password-confirm') is-invalid @enderror" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
 
