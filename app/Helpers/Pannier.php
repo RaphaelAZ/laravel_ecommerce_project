@@ -84,6 +84,13 @@ class Pannier
         session()->put('pannier', $after);
     }
 
+    /**
+     * Retourne l'item s'il existe
+     * @param Produit $target
+     * @return stdClass
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
     public static function getItem(Produit $target): stdClass
     {
         if(Pannier::exists() && Pannier::inPannier($target)) {
@@ -94,5 +101,93 @@ class Pannier
         } else {
             return new stdClass();
         }
+    }
+
+    /**
+     * Créer le pannier
+     * @return void
+     */
+    public static function createPannier()
+    {
+        if(!Pannier::exists()) {
+            session()->put('pannier', array());
+        }
+    }
+
+    /**
+     * Retourne le nombre d'items différents dans le pannier
+     * @return int
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
+    public static function numberOfItems(): int
+    {
+        if(Pannier::exists()) {
+            return sizeof(session()->get('pannier'));
+        } else {
+            Pannier::createPannier();
+            return 0;
+        }
+    }
+
+    /**
+     * Retourne tout le pannier
+     * @return array
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
+    public static function getAll(): array
+    {
+        return session()->get('pannier') ?? [];
+    }
+
+    public static function getItemTotal(Produit $target): float
+    {
+        return round(
+            $target->prix * Pannier::getItem($target)->quantite,
+            2
+        );
+    }
+
+    /**
+     * Edite la quantité d'un item
+     * @param Produit $target
+     * @param int $newQte
+     * @return void
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
+    public static function editItem(Produit $target, int $newQte): void
+    {
+        //Prise de l'item
+        $item = Pannier::getItem($target);
+        //Modifier sa qte
+        $item->quantite = $newQte;
+
+        $after = array_map(function($val) use ($newQte, $target) {
+            if($target->id === $val->produit->id) {
+                $val->quantite = $newQte;
+            }
+
+            return $val;
+        }, Pannier::getAll());
+
+        session()->put('pannier', $after);
+    }
+
+    /**
+     * Donne le total du pannier (string)
+     * @return string
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
+    public static function getTotal(): string
+    {
+        $total = array_reduce(Pannier::getAll(), function($carry, $item) {
+            $carry += $item->quantite * $item->produit->prix;
+            return $carry;
+        }, 0);
+
+        return str_replace(".",",",round($total, 2));
     }
 }

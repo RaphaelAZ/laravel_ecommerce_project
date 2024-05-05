@@ -14,4 +14,14 @@ class Produit extends Model
     {
         return $this->hasOne(Marque::class, 'code');
     }
+
+    public function categorie(): HasOne
+    {
+        return $this->hasOne(Categorie::class, 'id');
+    }
+
+    public function materiau(): HasOne
+    {
+        return $this->hasOne(Materiau::class, 'code');
+    }
 }

@@ -14,9 +14,11 @@ Auth::routes();
 Route::middleware(['auth'])->group(function () {
     Route::get('/moncompte', [App\Http\Controllers\UserController::class, 'index'])->name('account');
 
-    Route::controller(PannierController::class)->prefix('produit ')->group(function () {
+    Route::controller(PannierController::class)->prefix('pannier')->group(function () {
+        Route::get('', 'index')->name('pannier.index');
         Route::post('add', 'add')->name('pannier.add');
         Route::post('remove', 'remove')->name('pannier.remove');
+        Route::post('update', 'update')->name('pannier.update');
     });
 });
 
