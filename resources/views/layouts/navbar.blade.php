@@ -32,12 +32,15 @@
                     @endif
                 @else
                     <li class="relative">
-                        <a id="navbarDropdown" href="/moncompte" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
+                        <a href="/moncompte" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }}
                         </a>
 
-                        <div aria-labelledby="navbarDropdown" class="absolute hidden bg-white p-2 mt-2 rounded shadow-md">
-                            <a class="block px-4 py-2 text-gray-800" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <iconify-icon id="menu-icon" class="ml-4 cursor-pointer" id="navbarDropdown" icon="mdi:menu"></iconify-icon>
+
+                        <div id="menu-dropdown" aria-labelledby="navbarDropdown" class="absolute hidden bg-white p-2 mt-2 rounded shadow-md">
+                            <a class="flex flex-col items-center px-4 py-2 text-gray-800" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <iconify-icon class="text-red-600" icon="material-symbols:logout"></iconify-icon>
                                 {{ __('Logout') }}
                             </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">

@@ -13,13 +13,11 @@ const tailwindcss = require("tailwindcss");
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css')
+mix.js('resources/js/app.js', 'public/dist/js')
+    .sass('resources/sass/app.scss', 'public/dist/css')
     .options({
         postCss: [ tailwindcss('./tailwind.config.js') ],
     })
-
-
 
 //Shush
 mix.disableNotifications();
