@@ -2,11 +2,19 @@
     <link href="{{ asset('css/navbar.css') }}" rel="stylesheet">
 @stop
 
-<nav class="bg-gray-800 py-4">
+<nav class="bg-gray-800 py-4 text-white">
     <div class="container mx-auto px-4 flex justify-between items-center">
-        <a class="main-font" href="{{ url('/') }}">
-            CursedBazar
-        </a>
+        <div class="gap-8 flex items-center">
+            <a class="main-font text-center d-block" href="{{ url('/') }}">
+                Cursed<br/>Bazar
+            </a>
+
+            <a class="block h-fit" href="{{ route('produits.index') }}">
+                Produits
+            </a>
+        </div>
+
+
 
         <div id="navbarContent" class="hidden md:block">
             <ul class="flex items-center space-x-4">
