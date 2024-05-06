@@ -38,7 +38,7 @@ class Pannier
             $pannier = session()->get('pannier');
 
             foreach ($pannier as $index => $pannierItem) {
-                if($pannierItem->produit->id === $target->id) {
+                if(isset($pannierItem) && ($pannierItem->produit->id === $target->id)) {
                     return true;
                 }
             }
@@ -58,11 +58,13 @@ class Pannier
             session()->put('pannier', array());
         }
 
-        $push = new stdClass();
-        $push->produit = $produit;
-        $push->quantite = $qty;
+        if($qty > 0) {
+            $push = new stdClass();
+            $push->produit = $produit;
+            $push->quantite = $qty;
 
-        session()->push('pannier', $push);
+            session()->push('pannier', $push);
+        }
     }
 
     /**
@@ -81,6 +83,8 @@ class Pannier
             return $item->produit->id != $targetId;
         });
 
+        $after = array_values(array_filter($after));
+
         session()->put('pannier', $after);
     }
 
@@ -95,9 +99,9 @@ class Pannier
     {
         if(Pannier::exists() && Pannier::inPannier($target)) {
             $produits = session()->get('pannier');
-            return array_filter($produits, function ($item) use ($target) {
+            return array_values(array_filter($produits, function ($item) use ($target) {
                 return $item->produit->id == $target->id;
-            })[0];
+            }))[0];
         } else {
             return new stdClass();
         }
@@ -107,7 +111,7 @@ class Pannier
      * Créer le pannier
      * @return void
      */
-    public static function createPannier()
+    public static function createPannier(): void
     {
         if(!Pannier::exists()) {
             session()->put('pannier', array());
@@ -123,7 +127,7 @@ class Pannier
     public static function numberOfItems(): int
     {
         if(Pannier::exists()) {
-            return sizeof(session()->get('pannier'));
+            return sizeof(Pannier::getAll());
         } else {
             Pannier::createPannier();
             return 0;
@@ -141,6 +145,10 @@ class Pannier
         return session()->get('pannier') ?? [];
     }
 
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
     public static function getItemTotal(Produit $target): float
     {
         return round(
@@ -159,20 +167,25 @@ class Pannier
      */
     public static function editItem(Produit $target, int $newQte): void
     {
-        //Prise de l'item
-        $item = Pannier::getItem($target);
-        //Modifier sa qte
-        $item->quantite = $newQte;
+        if($newQte <= 0) {
+            Pannier::removeItem($target);
+        } else {
+            //Prise de l'item
+            $item = Pannier::getItem($target);
+            //Modifier sa qte
+            $item->quantite = $newQte;
 
-        $after = array_map(function($val) use ($newQte, $target) {
-            if($target->id === $val->produit->id) {
-                $val->quantite = $newQte;
-            }
 
-            return $val;
-        }, Pannier::getAll());
+            $after = array_map(function($val) use ($newQte, $target) {
+                if($target->id === $val->produit->id) {
+                    $val->quantite = $newQte;
+                }
 
-        session()->put('pannier', $after);
+                return $val;
+            }, Pannier::getAll());
+
+            session()->put('pannier', $after);
+        }
     }
 
     /**
