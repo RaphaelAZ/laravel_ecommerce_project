@@ -3,6 +3,11 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
+use LVR\CreditCard\CardCvc;
+use LVR\CreditCard\CardExpirationDate;
+use LVR\CreditCard\CardNumber;
+use LVR\CreditCard\Cards\Card;
 
 class StoreCommandeRequest extends FormRequest
 {
@@ -13,7 +18,7 @@ class StoreCommandeRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return Auth::check();
     }
 
     /**
@@ -24,7 +29,18 @@ class StoreCommandeRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            "nbr-carte" => [
+                "required",
+                new CardNumber(),
+            ],
+            "date" => [
+                "required",
+                new CardExpirationDate("m/y"),
+            ],
+            "ccv" => [
+                "required",
+                new CardCvc($this->get('nbr-carte')),
+            ],
         ];
     }
 }

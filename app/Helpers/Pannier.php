@@ -190,17 +190,72 @@ class Pannier
 
     /**
      * Donne le total du pannier (string)
-     * @return string
+     * @param bool $returnNum Retourne le chiffre plutôt que le string formaté.
+     * @return string|int
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
-    public static function getTotal(): string
+    public static function getSubTotal($returnNum = false)
     {
         $total = array_reduce(Pannier::getAll(), function($carry, $item) {
             $carry += $item->quantite * $item->produit->prix;
             return $carry;
         }, 0);
 
-        return str_replace(".",",",round($total, 2));
+        if(!$returnNum) {
+            return str_replace(".",",",round($total, 2));
+        } else {
+            return $total;
+        }
+    }
+
+    /**
+     * Redonne le prix TVA
+     * @param $returnNum bool Retourne un numéro au lieu d'un string.
+     * @return array|float|string|string[]
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
+    public static function getTVA($returnNum = false)
+    {
+        $final = round(Pannier::getSubTotal(true) * 0.2,2);
+
+        if($returnNum) {
+            return $final;
+        } else {
+            return str_replace(".", ",", (string)$final);
+        }
+    }
+
+    /**
+     * Retourne le vrai total (sous-total+tva)
+     * @param bool $returnNum
+     * @return array|float|string|string[]
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     * TODO: Code de réduction.
+     */
+    public static function getTotal(bool $returnNum = false)
+    {
+        $tva = Pannier::getTVA(true);
+        $sub = Pannier::getSubTotal(true);
+
+        $final = round($sub + $tva + 9.99,2);
+
+        if($returnNum) {
+            return $final;
+        } else {
+            return str_replace(".", ",", (string)$final);
+        }
+    }
+
+    /**
+     * Reset entièrement le pannier de l'utilisateur
+     * @return void
+     */
+    public static function resetPannier(): void
+    {
+        session()->remove('pannier');
+        Pannier::createPannier();
     }
 }

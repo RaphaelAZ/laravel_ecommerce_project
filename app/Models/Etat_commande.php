@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Etat_commande extends Model
 {
     use HasFactory;
+
+    protected $visible = [
+        "id",
+        "etat"
+    ];
 }
