@@ -29,7 +29,7 @@
                 <span>{{ $user->address }}</span>
             </div>
             <div class="mt-6 mb-4">
-                <a href="{{ route('commandes.index') }}" class="btn btn-primary">
+                <a href="{{ route('orders.index') }}" class="btn btn-primary">
                     <iconify-icon icon="mdi:cart"></iconify-icon>
                     Historique des commandes
                 </a>

@@ -9,7 +9,7 @@
                 Cursed<br/>Bazar
             </a>
 
-            <a class="block h-fit" href="{{ route('produits.index') }}">
+            <a class="block h-fit" href="{{ route('products.index') }}">
                 Produits
             </a>
 
@@ -36,8 +36,8 @@
                     @endif
                 @else
                     <li class="relative flex items-center gap-x-12">
-                        <a class="chip chip-primary flex" href="{{ route('panier.index') }}">
-                            <span class="pb-px">{{ \App\Helpers\Panier::numberOfItems() }}</span>
+                        <a class="chip chip-primary flex" href="{{ route('basket.index') }}">
+                            <span class="pb-px">{{ \App\Helpers\Basket::numberOfItems() }}</span>
                             <iconify-icon class="ml-2" icon="mdi:cart"></iconify-icon>
                         </a>
 
