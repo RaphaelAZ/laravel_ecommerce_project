@@ -1,5 +1,4 @@
 const mix = require('laravel-mix');
-require('mix-tailwindcss');
 const tailwindcss = require("tailwindcss");
 
 /*
