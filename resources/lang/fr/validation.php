@@ -129,7 +129,7 @@ return [
     'uploaded' => 'Le chargement du champ :attribute a échoué.',
     'url' => 'Le format de :attribute n\'est pas valide.',
     'uuid' => 'Le champ :attribute doit être un UUID valide.',
-    
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
@@ -140,13 +140,14 @@ return [
     | une ligne de langue personnalisée spécifique pour une règle d'attribut donnée.
     |
     */
-    
+
     'custom' => [
+        //TODO: Messages en fr CreditCard
         'attribute-name' => [
             'rule-name' => 'message-personnalisé',
         ],
     ],
-    
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Attributes
@@ -157,8 +158,7 @@ return [
     | Cela nous aide simplement à rendre notre message plus expressif.
     |
     */
-    
+
     'attributes' => [],
-    
+
 ];
-    

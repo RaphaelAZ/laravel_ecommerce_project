@@ -1,0 +1,8 @@
+//Applique un style de bouton avec une couleur de tailwind css
+@mixin applyBtn($variant: "blue", $textColor: "white") {
+    @apply text-#{$textColor};
+    @apply bg-#{$variant}-500;
+    @apply hover:bg-#{$variant}-400;
+    @apply border-#{$variant}-700;
+    @apply hover:border-#{$variant}-500;
+}

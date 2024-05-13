@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             ProduitSeeder::class,
             CommandeSeeder::class,
+            DetailCommandeSeeder::class
         ]);
     }
 }
