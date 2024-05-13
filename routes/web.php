@@ -4,6 +4,7 @@ use App\Http\Controllers\CommandeController;
 use App\Http\Controllers\PanierController;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\UsersManagementController;
 use App\Http\Middleware\CheckRole;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -36,7 +37,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::controller(AdminController::class)->prefix('dashboard')->middleware(CheckRole::class . ':admin')->group(function () {
         Route::get('', [AdminController::class, 'dashboard'])->name('dashboard');
-        Route::get('users', [AdminController::class, 'usersManagement'])->name('users-management');
+        Route::get('users', [UsersManagementController::class, 'usersManagement'])->name('users-management');
     });
 });
 

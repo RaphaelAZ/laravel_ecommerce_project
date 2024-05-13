@@ -10,59 +10,65 @@
 
     <!--container tables-->
     <div class="relative overflow-x-auto container mx-auto">
-        @foreach($commandes as $index => $commande)
-            <!--container single table-->
-            <div class="relative flex flex-col mx-8 mb-16 bg-gray-200 rounded p-4" data-id="{{ $index }}">
-                <!--info commande-->
-                <div class="flex flex-row items-center gap-x-8">
-                    <p>Code commande <span class="font-bold">{{ $commande->id }}</span></p>
-                    <p>Total <span class="font-bold">{{ str_replace(".",",",$commande->total) }} €</span></p>
-                    <p>Nbr Items <span class="font-bold">{{ sizeof($commande->produits) }}</span></p>
-                    <p>Etat <span class="font-bold">{{ $commande->etat }}</span></p>
-                    <p>Date <span class="font-bold">{{ \App\Helpers\Dates::clean($commande->date) }}</span></p>
+        @if(count($commandes)>0)
+            @foreach($commandes as $index => $commande)
+                <!--container single table-->
+                <div class="relative flex flex-col mx-8 mb-16 bg-gray-200 rounded p-4" data-id="{{ $index }}">
+                    <!--info commande-->
+                    <div class="flex flex-row items-center gap-x-8">
+                        <p>Code commande <span class="font-bold">{{ $commande->id }}</span></p>
+                        <p>Total <span class="font-bold">{{ str_replace(".",",",$commande->total) }} €</span></p>
+                        <p>Nbr Items <span class="font-bold">{{ sizeof($commande->produits) }}</span></p>
+                        <p>Etat <span class="font-bold">{{ $commande->etat }}</span></p>
+                        <p>Date <span class="font-bold">{{ \App\Helpers\Dates::clean($commande->date) }}</span></p>
 
-                    <button type="button" class="btn btn-primary" data-el="plus">
-                        <iconify-icon icon="mdi:plus"></iconify-icon>
-                    </button>
+                        <button type="button" class="btn btn-primary" data-el="plus">
+                            <iconify-icon icon="mdi:plus"></iconify-icon>
+                        </button>
 
-                    <button type="button" class="btn btn-primary hidden" data-el="minus">
-                        <iconify-icon icon="mdi:minus"></iconify-icon>
-                    </button>
+                        <button type="button" class="btn btn-primary hidden" data-el="minus">
+                            <iconify-icon icon="mdi:minus"></iconify-icon>
+                        </button>
+                    </div>
+
+                    <!--table produits-->
+                    <table data-el="table" class="w-full hidden text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 mt-3">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">
+                                Nom
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Quantité
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Total HT
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($commande->produits as $i => $produit)
+                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                    <td class="px-6 py-4">
+                                        <a href="{{ route('produits.show', $produit) }}">{{ $produit->nom }}</a>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $produit->pivot->quantite }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ round($produit->pivot->quantite * $produit->prix,2) }} €
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
-
-                <!--table produits-->
-                <table data-el="table" class="w-full hidden text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
-                        <th scope="col" class="px-6 py-3">
-                            Nom
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Quantité
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Total HT
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($commande->produits as $i => $produit)
-                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                <td class="px-6 py-4">
-                                    <a href="{{ route('produits.show', $produit) }}">{{ $produit->nom }}</a>
-                                </td>
-                                <td class="px-6 py-4">
-                                    {{ $produit->pivot->quantite }}
-                                </td>
-                                <td class="px-6 py-4">
-                                    {{ round($produit->pivot->quantite * $produit->prix,2) }} €
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        @endforeach
+            @endforeach
+        @else
+        <div class="max-w-md mx-auto mt-5 bg-white text-center overflow-hidden mb-6">
+            <h2>Aucune commande passée sur ce compte</h2>
+        </div>
+        @endif
     </div>
 @endsection
 
