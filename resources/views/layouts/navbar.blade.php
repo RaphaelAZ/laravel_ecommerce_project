@@ -2,11 +2,11 @@
     <link href="{{ asset('css/navbar.css') }}" rel="stylesheet">
 @stop
 
-<nav class="bg-gray-800 py-4 text-white">
+<nav class="bg-primary py-4 text-white fixed w-full top-0 left-0 z-50">
     <div class="container mx-auto px-4 flex justify-between items-center">
         <div class="gap-8 flex items-center">
             <a class="main-font text-center d-block" href="{{ url('/') }}">
-                Cursed<br/>Bazar
+                Cursed<br/>Bazaar
             </a>
 
             <a class="block h-fit" href="{{ route('products.index') }}">
@@ -41,7 +41,7 @@
                             <iconify-icon class="ml-2" icon="mdi:cart"></iconify-icon>
                         </a>
 
-                        <a href="/moncompte" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
+                        <a href="{{ route("account") }}" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }}
                         </a>
 
