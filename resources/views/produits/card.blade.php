@@ -16,9 +16,9 @@
             <p>{{ $produit->prix }} €</p>
 
             @auth
-                @if(\App\Helpers\Pannier::inPannier($produit))
-                    <span class="chip w-fit flex" title="{{ \App\Helpers\Pannier::getItem($produit)->quantite }} dans le pannier">
-                        {{ \App\Helpers\Pannier::getItem($produit)->quantite }}
+                @if(\App\Helpers\Panier::inPanier($produit))
+                    <span class="chip w-fit flex" title="{{ \App\Helpers\Panier::getItem($produit)->quantite }} dans le panier">
+                        {{ \App\Helpers\Panier::getItem($produit)->quantite }}
                         <iconify-icon class="ml-2" class="inline-block" icon="mdi:cart"></iconify-icon>
                     </span>
                 @endif

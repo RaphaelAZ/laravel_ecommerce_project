@@ -8,37 +8,37 @@ use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use stdClass;
 
-class Pannier
+class Panier
 {
     /**
-     * Check si le pannier existe seulement si l'utilisateur est connecté
+     * Check si le panier existe seulement si l'utilisateur est connecté
      * @return bool
      */
     public static function exists(): bool
     {
         if(Auth::check()) {
-            return session()->has('pannier');
+            return session()->has('panier');
         } else {
             return false;
         }
     }
 
     /**
-     * Check si le produit donné existe dans le pannier
+     * Check si le produit donné existe dans le panier
      * @param Produit $target
      * @return bool
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
-    public static function inPannier(Produit $target): bool
+    public static function inPanier(Produit $target): bool
     {
-        if(!Pannier::exists()) {
+        if(!Panier::exists()) {
             return false;
         } else {
-            $pannier = session()->get('pannier');
+            $panier = session()->get('panier');
 
-            foreach ($pannier as $index => $pannierItem) {
-                if(isset($pannierItem) && ($pannierItem->produit->id === $target->id)) {
+            foreach ($panier as $index => $panierItem) {
+                if(isset($panierItem) && ($panierItem->produit->id === $target->id)) {
                     return true;
                 }
             }
@@ -54,8 +54,8 @@ class Pannier
      */
     public static function addItem(Produit $produit, int $qty): void
     {
-        if(!Pannier::exists()) {
-            session()->put('pannier', array());
+        if(!Panier::exists()) {
+            session()->put('panier', array());
         }
 
         if($qty > 0) {
@@ -63,12 +63,12 @@ class Pannier
             $push->produit = $produit;
             $push->quantite = $qty;
 
-            session()->push('pannier', $push);
+            session()->push('panier', $push);
         }
     }
 
     /**
-     * Enlève l'item du pannier
+     * Enlève l'item du panier
      * @param Produit $produit
      * @return void
      * @throws ContainerExceptionInterface
@@ -78,14 +78,14 @@ class Pannier
     {
         $targetId = $produit->id;
 
-        $before = session()->get('pannier');
+        $before = session()->get('panier');
         $after = array_filter($before, function($item) use ($targetId) {
             return $item->produit->id != $targetId;
         });
 
         $after = array_values(array_filter($after));
 
-        session()->put('pannier', $after);
+        session()->put('panier', $after);
     }
 
     /**
@@ -97,8 +97,8 @@ class Pannier
      */
     public static function getItem(Produit $target): stdClass
     {
-        if(Pannier::exists() && Pannier::inPannier($target)) {
-            $produits = session()->get('pannier');
+        if(Panier::exists() && Panier::inPanier($target)) {
+            $produits = session()->get('panier');
             return array_values(array_filter($produits, function ($item) use ($target) {
                 return $item->produit->id == $target->id;
             }))[0];
@@ -108,41 +108,41 @@ class Pannier
     }
 
     /**
-     * Créer le pannier
+     * Créer le panier
      * @return void
      */
-    public static function createPannier(): void
+    public static function createPanier(): void
     {
-        if(!Pannier::exists()) {
-            session()->put('pannier', array());
+        if(!Panier::exists()) {
+            session()->put('panier', array());
         }
     }
 
     /**
-     * Retourne le nombre d'items différents dans le pannier
+     * Retourne le nombre d'items différents dans le panier
      * @return int
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
     public static function numberOfItems(): int
     {
-        if(Pannier::exists()) {
-            return sizeof(Pannier::getAll());
+        if(Panier::exists()) {
+            return sizeof(Panier::getAll());
         } else {
-            Pannier::createPannier();
+            Panier::createPanier();
             return 0;
         }
     }
 
     /**
-     * Retourne tout le pannier
+     * Retourne tout le panier
      * @return array
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
     public static function getAll(): array
     {
-        return session()->get('pannier') ?? [];
+        return session()->get('panier') ?? [];
     }
 
     /**
@@ -152,7 +152,7 @@ class Pannier
     public static function getItemTotal(Produit $target): float
     {
         return round(
-            $target->prix * Pannier::getItem($target)->quantite,
+            $target->prix * Panier::getItem($target)->quantite,
             2
         );
     }
@@ -168,10 +168,10 @@ class Pannier
     public static function editItem(Produit $target, int $newQte): void
     {
         if($newQte <= 0) {
-            Pannier::removeItem($target);
+            Panier::removeItem($target);
         } else {
             //Prise de l'item
-            $item = Pannier::getItem($target);
+            $item = Panier::getItem($target);
             //Modifier sa qte
             $item->quantite = $newQte;
 
@@ -182,14 +182,14 @@ class Pannier
                 }
 
                 return $val;
-            }, Pannier::getAll());
+            }, Panier::getAll());
 
-            session()->put('pannier', $after);
+            session()->put('panier', $after);
         }
     }
 
     /**
-     * Donne le total du pannier (string)
+     * Donne le total du panier (string)
      * @param bool $returnNum Retourne le chiffre plutôt que le string formaté.
      * @return string|int
      * @throws ContainerExceptionInterface
@@ -197,7 +197,7 @@ class Pannier
      */
     public static function getSubTotal($returnNum = false)
     {
-        $total = array_reduce(Pannier::getAll(), function($carry, $item) {
+        $total = array_reduce(Panier::getAll(), function($carry, $item) {
             $carry += $item->quantite * $item->produit->prix;
             return $carry;
         }, 0);
@@ -218,7 +218,7 @@ class Pannier
      */
     public static function getTVA($returnNum = false)
     {
-        $final = round(Pannier::getSubTotal(true) * 0.2,2);
+        $final = round(Panier::getSubTotal(true) * 0.2,2);
 
         if($returnNum) {
             return $final;
@@ -237,8 +237,8 @@ class Pannier
      */
     public static function getTotal(bool $returnNum = false)
     {
-        $tva = Pannier::getTVA(true);
-        $sub = Pannier::getSubTotal(true);
+        $tva = Panier::getTVA(true);
+        $sub = Panier::getSubTotal(true);
 
         $final = round($sub + $tva + 9.99,2);
 
@@ -250,12 +250,12 @@ class Pannier
     }
 
     /**
-     * Reset entièrement le pannier de l'utilisateur
+     * Reset entièrement le panier de l'utilisateur
      * @return void
      */
-    public static function resetPannier(): void
+    public static function resetPanier(): void
     {
-        session()->remove('pannier');
-        Pannier::createPannier();
+        session()->remove('panier');
+        Panier::createPanier();
     }
 }

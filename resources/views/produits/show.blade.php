@@ -2,7 +2,7 @@
 
 @php
 //Helpers
-use App\Helpers\Pannier;
+use App\Helpers\Panier;
 @endphp
 
 @section('content')
@@ -52,22 +52,22 @@ use App\Helpers\Pannier;
 
             <hr class="mb-8">
 
-            <!--pannier-->
+            <!--panier-->
             <div class="h-fit mb-8">
                 @guest
-                    Veuillez vous connecter pour ajouter cet article dans votre pannier.
+                    Veuillez vous connecter pour ajouter cet article dans votre panier.
                 @else
                     <form
                         class="contents"
-                        action="{{ route(Pannier::inPannier($produit) ? 'pannier.remove' : 'pannier.add') }}"
+                        action="{{ route(Panier::inPanier($produit) ? 'panier.remove' : 'panier.add') }}"
                         method="POST"
                     >
                         @csrf
                         <input name="id" type="hidden" value="{{ $produit->id }}">
-                        @if(Pannier::inPannier($produit))
+                        @if(Panier::inPanier($produit))
                             <div class="flex items-center row gap-x-4">
-                                <p><span>{{ Pannier::getItem($produit)->quantite }}</span> items dans le pannier.</p>
-                                <p class="font-bold">Total des items: {{ Pannier::getItem($produit)->quantite * $produit->prix }} €</p>
+                                <p><span>{{ Panier::getItem($produit)->quantite }}</span> items dans le panier.</p>
+                                <p class="font-bold">Total des items: {{ Panier::getItem($produit)->quantite * $produit->prix }} €</p>
                                 <button class="btn btn-danger flex items-center">
                                     <iconify-icon icon="mdi:cart-off"></iconify-icon>
                                 </button>

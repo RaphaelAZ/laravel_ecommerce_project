@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\CommandeController;
-use App\Http\Controllers\PannierController;
+use App\Http\Controllers\PanierController;
 use App\Http\Controllers\ProduitController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -15,11 +15,11 @@ Auth::routes();
 Route::middleware(['auth'])->group(function () {
     Route::get('/moncompte', [App\Http\Controllers\UserController::class, 'index'])->name('account');
 
-    Route::controller(PannierController::class)->prefix('pannier')->group(function () {
-        Route::get('', 'index')->name('pannier.index');
-        Route::post('add', 'add')->name('pannier.add');
-        Route::post('remove', 'remove')->name('pannier.remove');
-        Route::post('update', 'update')->name('pannier.update');
+    Route::controller(PanierController::class)->prefix('panier')->group(function () {
+        Route::get('', 'index')->name('panier.index');
+        Route::post('add', 'add')->name('panier.add');
+        Route::post('remove', 'remove')->name('panier.remove');
+        Route::post('update', 'update')->name('panier.update');
     });
 
     Route::controller(CommandeController::class)->prefix('commandes')->group(function () {

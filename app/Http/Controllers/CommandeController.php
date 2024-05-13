@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\Pannier;
+use App\Helpers\Panier;
 use App\Models\Commande;
 use App\Http\Requests\StoreCommandeRequest;
 use App\Http\Requests\UpdateCommandeRequest;
@@ -55,9 +55,9 @@ class CommandeController extends Controller
             $codeCommande = $commande->insertCommande();
 
             if(isset($codeCommande) && is_numeric($codeCommande)){
-                $commande->insertDetails($codeCommande, Pannier::getAll());
+                $commande->insertDetails($codeCommande, Panier::getAll());
 
-                Pannier::resetPannier();
+                Panier::resetPanier();
 
                 return redirect()->route('commandes.index')
                     ->with("message", "Votre commande a bien été enregistrée");

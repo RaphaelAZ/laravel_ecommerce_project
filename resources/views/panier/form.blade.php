@@ -70,7 +70,7 @@
                         <div class="space-y-2">
                             <dl class="flex items-center justify-between gap-4">
                                 <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Sous-total</dt>
-                                <dd class="text-base font-medium text-gray-900 dark:text-white">{{ Pannier::getSubTotal() }} €</dd>
+                                <dd class="text-base font-medium text-gray-900 dark:text-white">{{ Panier::getSubTotal() }} €</dd>
                             </dl>
 
                             <dl class="flex items-center justify-between gap-4">

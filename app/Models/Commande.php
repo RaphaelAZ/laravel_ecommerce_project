@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Helpers\Pannier;
+use App\Helpers\Panier;
 use DateTimeImmutable;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Collection;
@@ -69,7 +69,7 @@ class Commande extends Model
             "id_user" => Auth::user()->id,
             "etat" => 1,
             "date" => $now->format("Y-m-d"),
-            "total" => Pannier::getTotal(true),
+            "total" => Panier::getTotal(true),
             "created_at" => $now->format("Y-m-d H:i:s"),
             "updated_at" => $now->format("Y-m-d H:i:s")
         ];
@@ -83,11 +83,11 @@ class Commande extends Model
      * @return void
      *
      */
-    public function insertDetails(int $codeCommande, array $pannierItems = [])
+    public function insertDetails(int $codeCommande, array $panierItems = [])
     {
         $now = new DateTimeImmutable("now");
 
-        foreach ($pannierItems as $index => $item) {
+        foreach ($panierItems as $index => $item) {
             $toInsert = [
                 "commande_id" => $codeCommande,
                 "produit_id" => $item->produit->id,

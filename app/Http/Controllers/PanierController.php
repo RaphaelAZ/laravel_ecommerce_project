@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\Pannier;
+use App\Helpers\Panier;
 use App\Models\Produit;
 use Exception;
 use Illuminate\Http\RedirectResponse;
@@ -10,15 +10,15 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Throwable;
 
-class PannierController extends Controller
+class PanierController extends Controller
 {
     public function index(): View
     {
-        return view("pannier.index");
+        return view("panier.index");
     }
 
     /**
-     * Ajoute un item dans le pannier.
+     * Ajoute un item dans le panier.
      * @param Request $request
      * @return RedirectResponse
      */
@@ -29,13 +29,13 @@ class PannierController extends Controller
             throw_if(!$request->isMethod('POST'));
             //Le produit
             $target = Produit::find($request->get('id'));
-            //Si le pannier n'existe pas, le créer
-            if(!Pannier::exists()) {
-                session()->put('pannier', array());
+            //Si le panier n'existe pas, le créer
+            if(!Panier::exists()) {
+                session()->put('panier', array());
             }
-            //Si l'article n'est pas dans le pannier, alors l'ajouter
-            if(!Pannier::inPannier($target)) {
-                Pannier::addItem($target, $request->quantite);
+            //Si l'article n'est pas dans le panier, alors l'ajouter
+            if(!Panier::inPanier($target)) {
+                Panier::addItem($target, $request->quantite);
             }
         } catch (Exception|Throwable $e) {} finally {
             //Dans tous les cas rediriger vers la route du produit.
@@ -44,7 +44,7 @@ class PannierController extends Controller
     }
 
     /**
-     * Supprime un item dans le pannier
+     * Supprime un item dans le panier
      * @param Request $request
      * @return RedirectResponse
      */
@@ -55,9 +55,9 @@ class PannierController extends Controller
             throw_if(!$request->isMethod('POST'));
             //Le produit
             $target = Produit::find($request->get('id'));
-            //Si le pannier existe, supprimer l'item
-            if(Pannier::exists()) {
-                Pannier::removeItem($target);
+            //Si le panier existe, supprimer l'item
+            if(Panier::exists()) {
+                Panier::removeItem($target);
             }
         } catch (Exception|Throwable $e) {} finally {
             //Dans tous les cas rediriger vers la route du produit.
@@ -72,9 +72,9 @@ class PannierController extends Controller
             throw_if(!$request->isMethod('POST'));
             //Le produit
             $target = Produit::find($request->get('id'));
-            //Si le pannier existe, supprimer l'item
-            if(Pannier::exists()) {
-                Pannier::editItem($target, $request->get('quantite'));
+            //Si le panier existe, supprimer l'item
+            if(Panier::exists()) {
+                Panier::editItem($target, $request->get('quantite'));
             }
         } catch (Exception|Throwable $e) {} finally {
             //Dans tous les cas rediriger vers la route du produit.

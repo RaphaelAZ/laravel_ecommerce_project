@@ -32,8 +32,8 @@
                     @endif
                 @else
                     <li class="relative flex items-center gap-x-12">
-                        <a class="chip chip-primary flex" href="{{ route('pannier.index') }}">
-                            <span class="pb-px">{{ \App\Helpers\Pannier::numberOfItems() }}</span>
+                        <a class="chip chip-primary flex" href="{{ route('panier.index') }}">
+                            <span class="pb-px">{{ \App\Helpers\Panier::numberOfItems() }}</span>
                             <iconify-icon class="ml-2" icon="mdi:cart"></iconify-icon>
                         </a>
 

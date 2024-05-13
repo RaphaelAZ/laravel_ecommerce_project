@@ -6,7 +6,7 @@
         <a href="{{ route('produits.show', $produit) }}">{{ $produit->nom }}</a>
     </td>
     <td class="px-6 py-4">
-        <form action="{{ route('pannier.update') }}" method="POST" class="flex flex-row gap-x-4 w-fit">
+        <form action="{{ route('panier.update') }}" method="POST" class="flex flex-row gap-x-4 w-fit">
             @csrf
             <input type="hidden" name="id" value="{{ $produit->id }}">
 
@@ -26,10 +26,10 @@
         </form>
     </td>
     <td class="px-6 py-4">
-        {{ \App\Helpers\Pannier::getItemTotal($produit) }} €
+        {{ \App\Helpers\Panier::getItemTotal($produit) }} €
     </td>
     <td class="px-6 py-4">
-        <form action="{{ route('pannier.remove') }}" method="POST">
+        <form action="{{ route('panier.remove') }}" method="POST">
             @csrf
             <input name="id" type="hidden" value="{{ $produit->id }}">
 

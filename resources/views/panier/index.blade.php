@@ -2,15 +2,15 @@
 
 @php
     //Helpers
-    use App\Helpers\Pannier;
+    use App\Helpers\Panier;
 @endphp
 
 @section('content')
-    <section id="pannier">
+    <section id="panier">
         <div class="container mx-auto">
             <h1 class="text-3xl justify-center w-full my-8 flex items-center">
                 <iconify-icon icon="mdi:cart" class="mr-4"></iconify-icon>
-                Pannier
+                Panier
             </h1>
 
             <div class="relative overflow-x-auto">
@@ -35,9 +35,9 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach(Pannier::getAll() as $index => $item)
+                    @foreach(Panier::getAll() as $index => $item)
                         @if(!empty($item))
-                            @include('pannier.line', [
+                            @include('panier.line', [
                                 'produit' => $item->produit,
                                 'quantite' => $item->quantite,
                                 'itemNo' => $index + 1,
@@ -50,7 +50,7 @@
         </div>
     </section>
 
-    @include("pannier.form")
+    @include("panier.form")
 
     @if($errors->any())
         <ul>
