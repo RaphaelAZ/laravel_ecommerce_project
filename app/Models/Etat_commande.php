@@ -9,6 +9,8 @@ class Etat_commande extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = "id";
+
     protected $visible = [
         "id",
         "etat"

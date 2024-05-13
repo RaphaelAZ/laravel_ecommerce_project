@@ -21,6 +21,8 @@ class Commande extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = "id";
+
     public function getFromUser($user): Collection
     {
         if(isset($user->id))

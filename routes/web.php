@@ -42,3 +42,4 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::resource('produits',ProduitController::class)->names('produits');
+Route::post("produits/results", [ProduitController::class, 'filters'])->name("produits.filters.result");

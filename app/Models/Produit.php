@@ -2,28 +2,33 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Http\Request;
 
 class Produit extends Model
 {
     use HasFactory;
 
-    public function marque(): HasOne
+    protected $primaryKey = "id";
+
+    public function marque(): BelongsTo
     {
-        return $this->hasOne(Marque::class, 'code');
+        return $this->belongsTo(Marque::class, 'id_marque');
     }
 
-    public function categorie(): HasOne
+    public function categorie(): BelongsTo
     {
-        return $this->hasOne(Categorie::class, 'id');
+        return $this->belongsTo(Categorie::class, 'id_categorie');
     }
 
-    public function materiau(): HasOne
+    public function materiau(): BelongsTo
     {
-        return $this->hasOne(Materiau::class, 'code');
+        return $this->belongsTo(Materiau::class, 'id_materiau');
     }
 
     public function commande(): BelongsToMany

@@ -23,15 +23,39 @@
                     </span>
                 @endif
             @endauth
-
-            <!--
-            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
-            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
-            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
-            -->
         </div>
 
-        <span class="btn btn-primary">Voir</span>
+        <!--tableau produits-->
+        <div class="flex flex-col *:items-center">
+            <div class="grid grid-cols-2">
+                <p class="col-start-1 col-end-2 font-bold">Usage</p>
+                <span class="col-start-2 col-end-3">{{ $produit->usage }}</span>
+            </div>
 
+            <hr class="my-1">
+
+            <div class="grid grid-cols-2">
+                <p class="col-start-1 col-end-2 font-bold">Matériau</p>
+                <span class="col-start-2 col-end-3">{{ optional($produit->materiau)->libelle }}</span>
+            </div>
+
+            <hr class="my-1">
+
+            <div class="grid grid-cols-2">
+                <p class="col-start-1 col-end-2 font-bold">Marque</p>
+                <span class="col-start-2 col-end-3">{{ optional($produit->marque)->libelle }}</span>
+            </div>
+
+            <hr class="my-1">
+
+            <div class="grid grid-cols-2">
+                <p class="col-start-1 col-end-2 font-bold">Catégorie</p>
+                <span class="col-start-2 col-end-3">{{ optional($produit->categorie)->nom }}</span>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <span class="btn btn-primary">Voir</span>
+        </div>
     </article>
 </a>

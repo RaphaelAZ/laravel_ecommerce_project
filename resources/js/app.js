@@ -1,4 +1,3 @@
-require('./bootstrap');
 import Glide, { Controls, Breakpoints, Autoplay } from '@glidejs/glide/dist/glide.modular.esm'
 import 'iconify-icon';
 import 'flowbite';

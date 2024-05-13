@@ -6,7 +6,7 @@
 @import "funcs";
 
 // Slider
-@import "node_modules/@glidejs/glide/src/assets/sass/glide.core";
+@import "../../node_modules/@glidejs/glide/src/assets/sass/glide.core.scss";
 
 //Tailwind
 @tailwind base;
@@ -36,6 +36,20 @@
 
         &.chip-primary {
             @apply bg-blue-500;
+        }
+    }
+
+
+
+    .semi-chip {
+        @apply relative flex items-center rounded-lg border-2 border-gray-900;
+
+        span:first-child {
+            @apply bg-gray-900 text-white;
+        }
+
+        span:last-child {
+            @apply text-gray-900;
         }
     }
 }
