@@ -12,6 +12,10 @@
             <a class="block h-fit" href="{{ route('produits.index') }}">
                 Produits
             </a>
+
+            <a class="block h-fit" href="{{ route('contact') }}">
+                Nous Contacter
+            </a>
         </div>
 
 

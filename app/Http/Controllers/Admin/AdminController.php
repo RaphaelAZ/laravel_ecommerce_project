@@ -51,6 +51,6 @@ class AdminController extends Controller
     public function usersManagement() {
         $user = new User();
         $users = $user->all();
-        return view('admin.dashboard.users.index', compact('users'));
+        return view('admin.users.index', compact('users'));
     }
 }
