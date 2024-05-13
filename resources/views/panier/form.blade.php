@@ -1,6 +1,6 @@
 @php
     //Helpers
-    use App\Helpers\Pannier;
+    use App\Helpers\Panier;
 @endphp
 
 <section id="payment" class="bg-white py-8 antialiased dark:bg-gray-900 md:py-16">
@@ -85,13 +85,13 @@
 
                             <dl class="flex items-center justify-between gap-4">
                                 <dt class="text-base font-normal text-gray-500 dark:text-gray-400">TVA</dt>
-                                <dd class="text-base font-medium text-gray-900 dark:text-white">{{ Pannier::getTVA() }} €</dd>
+                                <dd class="text-base font-medium text-gray-900 dark:text-white">{{ Panier::getTVA() }} €</dd>
                             </dl>
                         </div>
 
                         <dl class="flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700">
                             <dt class="text-base font-bold text-gray-900 dark:text-white">Total</dt>
-                            <dd class="text-base font-bold text-gray-900 dark:text-white">{{ Pannier::getTotal() }} €</dd>
+                            <dd class="text-base font-bold text-gray-900 dark:text-white">{{ Panier::getTotal() }} €</dd>
                         </dl>
                     </div>
 
