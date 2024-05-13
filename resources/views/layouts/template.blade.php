@@ -22,6 +22,13 @@
 </head>
 <body>
     @include('layouts.navbar')
+
+    <hr>
+    
+    @if(Auth::check() && Auth::user()->role === 'admin')
+        @include('layouts.admin.admin-navbar')
+    @endif
+
     <div id="app">
         <main>
             @yield('content')
