@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreMarqueRequest;
-use App\Http\Requests\UpdateMarqueRequest;
+use App\Http\Requests\StoreBrandRequest;
+use App\Http\Requests\UpdateBrandRequest;
 use App\Models\Brand;
 
 class BrandController extends Controller
@@ -31,10 +31,10 @@ class BrandController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreMarqueRequest  $request
+     * @param  \App\Http\Requests\StoreBrandRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreMarqueRequest $request)
+    public function store(StoreBrandRequest $request)
     {
         //
     }
@@ -42,10 +42,10 @@ class BrandController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Marque  $marque
+     * @param  \App\Models\Brand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function show(Brand $marque)
+    public function show(Brand $brand)
     {
         //
     }
@@ -53,10 +53,10 @@ class BrandController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Marque  $marque
+     * @param  \App\Models\Brand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function edit(Brand $marque)
+    public function edit(Brand $brand)
     {
         //
     }
@@ -64,11 +64,11 @@ class BrandController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateMarqueRequest  $request
-     * @param  \App\Models\Marque  $marque
+     * @param  \App\Http\Requests\UpdateBrandRequest  $request
+     * @param  \App\Models\Brand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateMarqueRequest $request, Brand $marque)
+    public function update(UpdateBrandRequest $request, Brand $brand)
     {
         //
     }
@@ -76,10 +76,10 @@ class BrandController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Marque  $marque
+     * @param  \App\Models\Brand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Brand $marque)
+    public function destroy(Brand $brand)
     {
         //
     }

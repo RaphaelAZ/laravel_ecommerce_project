@@ -22,35 +22,35 @@
                 @CSRF
 
                 <div class="col-start-1 col-end-4">
-                    @include('composants.input', [
+                    @include('components.input', [
                         "id" => "input-name",
-                        "name" => "nom-prod",
+                        "name" => "name-prod",
                         "label" => "Nom du produit"
                     ])
                 </div>
 
                 <div class="col-start-1 col-end-2">
-                    @include('composants.select', [
-                        "id" => "input-marque",
-                        "name" => "marque-libelle",
+                    @include('components.select', [
+                        "id" => "input-brand",
+                        "name" => "brand-wording",
                         "label" => "Marque",
                         "options" => $brands,
                     ])
                 </div>
 
                 <div class="col-start-2 col-end-3">
-                    @include('composants.select', [
-                        "id" => "input-materiau",
-                        "name" => "materiau-libelle",
+                    @include('components.select', [
+                        "id" => "input-material",
+                        "name" => "material-wording",
                         "label" => "Matériau",
                         "options" => $materials
                     ])
                 </div>
 
                 <div class="col-start-3 col-end-4">
-                    @include('composants.select', [
-                        "id" => "input-categorie",
-                        "name" => "categorie-libelle",
+                    @include('components.select', [
+                        "id" => "input-category",
+                        "name" => "category-wording",
                         "label" => "Catégorie",
                         "options" => $categories,
                     ])

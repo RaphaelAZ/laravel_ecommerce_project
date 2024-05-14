@@ -46,7 +46,7 @@ use App\Helpers\Basket;
                 <!--usage-->
                 <div class="flex items-center px-2 py-5 flex-col overflow-hidden">
                     <p class="text-center mb-4">Marque</p>
-                    <p class="chip break-words w-100 text-sm">{{ $product->brand->wording }}</p>
+                    <p class="chip break-words w-100 text-sm">{{ $product->brand }}</p>
                 </div>
             </div>
 
