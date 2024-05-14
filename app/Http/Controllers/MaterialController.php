@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreMateriauRequest;
-use App\Http\Requests\UpdateMateriauRequest;
+use App\Http\Requests\StoreMaterialRequest;
+use App\Http\Requests\UpdateMaterialRequest;
 use App\Models\Material;
 
 class MaterialController extends Controller
@@ -31,10 +31,10 @@ class MaterialController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreMateriauRequest  $request
+     * @param  \App\Http\Requests\StoreMaterialRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreMateriauRequest $request)
+    public function store(StoreMaterialRequest $request)
     {
         //
     }
@@ -42,10 +42,10 @@ class MaterialController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Materiau  $materiau
+     * @param  \App\Models\Material  $material
      * @return \Illuminate\Http\Response
      */
-    public function show(Material $materiau)
+    public function show(Material $material)
     {
         //
     }
@@ -53,10 +53,10 @@ class MaterialController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Materiau  $materiau
+     * @param  \App\Models\Material  $material
      * @return \Illuminate\Http\Response
      */
-    public function edit(Material $materiau)
+    public function edit(Material $material)
     {
         //
     }
@@ -64,11 +64,11 @@ class MaterialController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateMateriauRequest  $request
-     * @param  \App\Models\Materiau  $materiau
+     * @param  \App\Http\Requests\UpdateMaterialRequest  $request
+     * @param  \App\Models\Material  $material
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateMateriauRequest $request, Material $materiau)
+    public function update(UpdateMaterialRequest $request, Material $material)
     {
         //
     }
@@ -76,10 +76,10 @@ class MaterialController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Materiau  $materiau
+     * @param  \App\Models\Material  $material
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Material $materiau)
+    public function destroy(Material $material)
     {
         //
     }

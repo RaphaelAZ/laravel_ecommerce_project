@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Material;
-use App\Models\Materiau;
 use Illuminate\Database\Seeder;
 
 class MaterialSeeder extends Seeder

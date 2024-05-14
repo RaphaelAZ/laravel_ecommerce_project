@@ -36,21 +36,21 @@
 
             <div class="grid grid-cols-2">
                 <p class="col-start-1 col-end-2 font-bold">Matériau</p>
-                <span class="col-start-2 col-end-3">{{ optional($product->materiau)->libelle }}</span>
+                <span class="col-start-2 col-end-3">{{ optional($product->material)->wording }}</span>
             </div>
 
             <hr class="my-1">
 
             <div class="grid grid-cols-2">
                 <p class="col-start-1 col-end-2 font-bold">Marque</p>
-                <span class="col-start-2 col-end-3">{{ optional($product->marque)->libelle }}</span>
+                <span class="col-start-2 col-end-3">{{ optional($product->brand)->wording }}</span>
             </div>
 
             <hr class="my-1">
 
             <div class="grid grid-cols-2">
                 <p class="col-start-1 col-end-2 font-bold">Catégorie</p>
-                <span class="col-start-2 col-end-3">{{ optional($product->categorie)->nom }}</span>
+                <span class="col-start-2 col-end-3">{{ optional($product->category)->name }}</span>
             </div>
         </div>
 
