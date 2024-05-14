@@ -9,7 +9,7 @@
             src="{{ $product->image ?? 'placeholder.png' }}"
             alt="no">
 
-        <h3 class="font-bold text-xl mb-2">{{ $product->nom }}</h3>
+        <h3 class="font-bold text-xl mb-2">{{ $product->name }}</h3>
         <p class="text-gray-700 text-base">{{ mb_strimwidth($product->description, 0, 150, '...') }}</p>
 
         <div class="pt-4 pb-2 flex items-center gap-x-4">
