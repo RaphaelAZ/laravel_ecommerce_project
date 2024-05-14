@@ -1,17 +1,17 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\UsersManagementController;
 use App\Http\Controllers\BasketController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\UsersManagementController;
+use App\Http\Controllers\UserController;
 use App\Http\Middleware\CheckRole;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::get('/', [HomeController::class, "index"])->name('home');
 
 Route::get('/contact', function () {
     return view('contact');
@@ -20,7 +20,7 @@ Route::get('/contact', function () {
 Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/moncompte', [App\Http\Controllers\UserController::class, 'index'])->name('account');
+    Route::get('/moncompte', [UserController::class, 'index'])->name('account');
 
     Route::controller(BasketController::class)->prefix('panier')->group(function () {
         Route::get('', 'index')->name('basket.index');
@@ -31,7 +31,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::controller(OrderController::class)->prefix('commandes')->group(function () {
         Route::get('', 'index')->name('orders.index');
-        //Action d'ajout de la commande
+        //Action of adding the order
         Route::post('add', 'store')->name('orders.add');
     });
 
@@ -41,5 +41,9 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
-Route::resource('produits',ProductController::class)->names('products');
-Route::post("products/results", [ProductController::class, 'filters'])->name("products.filters.result");
+Route::prefix('produits')->group(function () {
+    Route::resource('', ProductController::class)->names('products');
+    Route::post("resultat", [ProductController::class, 'filters'])->name("products.filters.result");
+    Route::get("{category}", [ProductController::class, 'category'])->name("products.category");
+});
+

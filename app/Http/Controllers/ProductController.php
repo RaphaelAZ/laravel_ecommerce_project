@@ -120,7 +120,7 @@ class ProductController extends Controller
             return (
                 $val !== null &&
                 $val !== '__none__' &&
-                (int) $val !== 0
+                $val !== "0"
             );
         });
 

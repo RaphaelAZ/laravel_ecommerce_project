@@ -10,27 +10,27 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('dist/js/app.js') }}" defer></script>
+    <script src="{{ mix('dist/js/app.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('dist/css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('dist/css/app.css') }}" rel="stylesheet">
     @yield('styles')
 </head>
-<body>
+<body class="relative overflow-x-hidden">
     @include('layouts.navbar')
 
     <hr>
-    
+
     @if(Auth::check() && Auth::user()->role === 'admin')
         @include('layouts.admin.admin-navbar')
     @endif
 
     <div id="app">
-        <main>
+        <main class="relative">
             @yield('content')
         </main>
     </div>
