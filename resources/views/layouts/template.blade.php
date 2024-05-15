@@ -21,13 +21,16 @@
     @yield('styles')
 </head>
 <body class="relative overflow-x-hidden">
-    @include('layouts.navbar')
+    <div class="sticky top-0 left-0 w-full h-fit z-50">
+        @include('layouts.navbar')
 
-    <hr>
+        <hr>
 
-    @if(Auth::check() && Auth::user()->role === 'admin')
-        @include('layouts.admin.admin-navbar')
-    @endif
+        @if(Auth::check() && Auth::user()->role === 'admin')
+            @include('layouts.admin.admin-navbar')
+        @endif
+    </div>
+
 
     <div id="app">
         <main class="relative">

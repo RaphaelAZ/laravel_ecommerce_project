@@ -20,7 +20,7 @@
                         <textarea id="message" name="message" class="form-textarea w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-400" rows="6" placeholder="Votre message" required></textarea>
                     </div>
                     <div class="text-center">
-                        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-3 rounded-md transition duration-300">Envoyer</button>
+                        <button type="submit" class="btn btn-primary">Envoyer</button>
                     </div>
                 </form>
             </div>

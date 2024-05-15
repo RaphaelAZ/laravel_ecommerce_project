@@ -2,7 +2,7 @@
     <link href="{{ asset('css/navbar.css') }}" rel="stylesheet">
 @stop
 
-<nav class="bg-primary py-4 text-white fixed w-full top-0 left-0 z-50">
+<nav class="bg-primary py-4 text-white w-full top-0 left-0 z-50">
     <div class="container mx-auto px-4 flex justify-between items-center">
         <div class="gap-8 flex items-center">
             <a class="main-font text-center d-block" href="{{ url('/') }}">
