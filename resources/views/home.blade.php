@@ -28,14 +28,18 @@
             class="text-decoration-underline"
             href="{{ route('products.category', $category->id) }}"
         >
-            {{ $category->nom }}
+            {{ $category->name }}
         </a>
     </h3>
 
     <div id="glide" class="multi">
         <div class="glide__track" data-glide-el="track">
             <div class="glide__slides">
-                <div class="glide__slide p-8">Cock</div>
+                @foreach($offers as $index => $offer)
+                    <div class="glide__slide p-8">
+                        {{ $offer['product']->name }}
+                    </div>
+                @endforeach
             </div>
         </div>
 

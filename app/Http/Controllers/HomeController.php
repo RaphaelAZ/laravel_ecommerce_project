@@ -34,6 +34,7 @@ class HomeController extends Controller
 
         //all products of target category
         $products = Product::where("id_category", $catId)->get();
+
         //random products of target category: between 1 and a random number depending on how many items they are.
         $productsAll = $products->random(random_int(1, count($products)));
 

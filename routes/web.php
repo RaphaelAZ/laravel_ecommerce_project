@@ -56,4 +56,3 @@ Route::prefix('produits')->group(function () {
     Route::post("resultat", [ProductController::class, 'filters'])->name("products.filters.result");
     Route::get("/categorie/{category}", [ProductController::class, 'category'])->name("products.category");
 });
-
