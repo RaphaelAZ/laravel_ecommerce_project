@@ -11,12 +11,11 @@
     </label>
 @endif
 
-<input
-    class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pe-10 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500  dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
-    type="{{ $type ?? 'text' }}"
-    @if(isset($value)) value="{{ $value }}" @endif
+<textarea
+    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
     @if(isset($id)) id="{{ $id }}" @endif
+    rows="{{ $rows ?? 4 }}"
     @if(!empty($name)) name="{{ $name }}" @endif
     @if(!empty($placeholder)) placeholder="{{ $placeholder }}" @endif
     @if(isset($required) && (bool)$required===true) required @endif
-/>
+>{{ $value ?? "" }}</textarea>

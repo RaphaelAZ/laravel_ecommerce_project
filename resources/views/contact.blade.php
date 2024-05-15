@@ -14,16 +14,35 @@
                 <form action="{{ route('contact.add')}}" method="POST">
                 @CSRF
                     <div class="mb-4">
-                        <label for="name" class="block text-gray-600 font-semibold mb-2">Nom</label>
-                        <input type="text" id="name" name="name" value="{{Auth::user() ? Auth::user()->name : ''}}" class="form-input w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-400" placeholder="Votre nom" required>
+                        @include('components.input', [
+                            "name" => "name",
+                            "label" => "Nom",
+                            "id" => "name",
+                            "value" => Auth::user() ? Auth::user()->name : '',
+                            "required" => true,
+                            "placeholder" => "Votre nom"
+                        ])
                     </div>
                     <div class="mb-4">
-                        <label for="email" class="block text-gray-600 font-semibold mb-2">Email</label>
-                        <input type="email" id="email" name="email" value="{{Auth::user() ? Auth::user()->email : ''}}" class="form-input w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-400" placeholder="Votre email" required>
+                        @include('components.input', [
+                            "name" => "email",
+                            "label" => "Email",
+                            "type" => "email",
+                            "id" => "email",
+                            "value" => Auth::user() ? Auth::user()->email : '',
+                            "required" => true,
+                            "placeholder" => "Votre email"
+                        ])
                     </div>
                     <div class="mb-4">
-                        <label for="message" class="block text-gray-600 font-semibold mb-2">Message</label>
-                        <textarea id="message" name="message" class="form-textarea w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-400" rows="6" placeholder="Votre message" required></textarea>
+                        @include('components.textarea', [
+                            "name" => "message",
+                            "label" => "Message",
+                            "id" => "message",
+                            "rows" => 6,
+                            "required" => true,
+                            "placeholder" => "Votre message"
+                        ])
                     </div>
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary">Envoyer</button>
