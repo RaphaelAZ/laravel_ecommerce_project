@@ -46,7 +46,7 @@ use App\Helpers\Basket;
                 <!--usage-->
                 <div class="flex items-center px-2 py-5 flex-col overflow-hidden">
                     <p class="text-center mb-4">Marque</p>
-                    <p class="chip break-words w-100 text-sm">{{ $product->brand }}</p>
+                    <p class="chip break-words w-100 text-sm">{{ $product->brand->wording }}</p>
                 </div>
             </div>
 
@@ -57,6 +57,7 @@ use App\Helpers\Basket;
                 @guest
                     Veuillez vous connecter pour ajouter cet article dans votre panier.
                 @else
+                    <h5 class="text-center text-lg font-bold">Ajouter au pannier</h5>
                     <form
                         class="contents"
                         action="{{ route(Basket::inBasket($product) ? 'basket.remove' : 'basket.add') }}"

@@ -49,10 +49,11 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
+Route::resource('produits', ProductController::class)->names('products');
+
 //Gestion des produits
 Route::prefix('produits')->group(function () {
-    Route::resource('', ProductController::class)->names('products');
     Route::post("resultat", [ProductController::class, 'filters'])->name("products.filters.result");
-    Route::get("{category}", [ProductController::class, 'category'])->name("products.category");
+    Route::get("/categorie/{category}", [ProductController::class, 'category'])->name("products.category");
 });
 

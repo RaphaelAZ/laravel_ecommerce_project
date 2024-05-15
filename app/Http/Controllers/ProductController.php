@@ -70,11 +70,12 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param Product $product
+     * @param int $id
      * @return Application|Factory|View
      */
-    public function show(Product $product)
+    public function show(int $id)
     {
+        $product = Product::findOrFail($id);
         return view("products.show", [
             "product" => $product,
         ]);
@@ -153,5 +154,10 @@ class ProductController extends Controller
             "products" => $q->get(),
             "filters" => $filters,
         ]);
+    }
+
+    public function category(Category $category)
+    {
+
     }
 }
