@@ -3,7 +3,7 @@
         {{ $itemNo }}
     </th>
     <td class="px-6 py-4">
-        <a href="{{ route('products.show', $product) }}">{{ $product->nom }}</a>
+        <a href="{{ route('products.show', $product) }}">{{ $product->name }}</a>
     </td>
     <td class="px-6 py-4">
         <form action="{{ route('basket.update') }}" method="POST" class="flex flex-row gap-x-4 w-fit">
