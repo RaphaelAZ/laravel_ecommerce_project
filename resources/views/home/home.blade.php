@@ -1,5 +1,13 @@
 @extends('layouts.template')
 
+@section('styles')
+    <style>
+        .glide__slide--active {
+            transition: all 0.3s ease-in-out;
+        }
+    </style>
+@endsection
+
 @section('content')
 <section id="main" class="w-full h-screen">
     <div
@@ -33,21 +41,23 @@
     </h3>
 
     <div id="glide" class="multi">
-        <div class="glide__track" data-glide-el="track">
+        <div class="glide__track my-8" data-glide-el="track" data-slider-length="">
             <div class="glide__slides">
                 @foreach($offers as $index => $offer)
-                    <div class="glide__slide p-8">
-                        {{ $offer['product']->name }}
-                    </div>
+                    @include('home.caroussel_card', [
+                        "offer" => $offer
+                    ])
                 @endforeach
             </div>
         </div>
 
-        <div class="glide__arrows" data-glide-el="controls">
-            <button class="glide__arrow glide__arrow--left btn btn-primary" data-glide-dir="<">
+        <div class="glide__arrows flex flex-row justify-center gap-x-12" data-glide-el="controls">
+            <button class="glide__arrow glide__arrow--left btn btn-primary w-fit flex items-center gap-x-2" data-glide-dir="<">
                 <iconify-icon icon="material-symbols:chevron-left"></iconify-icon>
+                Précédent
             </button>
-            <button class="glide__arrow glide__arrow--right btn btn-primary" data-glide-dir=">">
+            <button class="glide__arrow glide__arrow--right btn btn-primary w-fit flex items-center gap-x-2" data-glide-dir=">">
+                Suivant
                 <iconify-icon icon="material-symbols:chevron-right"></iconify-icon>
             </button>
         </div>

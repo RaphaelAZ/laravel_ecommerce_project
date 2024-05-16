@@ -26,8 +26,6 @@ class ProductController extends Controller
         $products = Product::paginate(15);
         $q = Product::query();
 
-
-
         $brands = Brand::all()->pluck('wording', 'code');
         $materials = Material::all()->pluck('wording', 'code');
         $categories = Category::all()->pluck('name', 'id');

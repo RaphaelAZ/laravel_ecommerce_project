@@ -7,7 +7,6 @@ use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
-use Random\RandomException;
 
 class HomeController extends Controller
 {
@@ -26,7 +25,7 @@ class HomeController extends Controller
      * @return Renderable
      * @throws RandomException
      */
-    public function index()
+    public function index(): Renderable
     {
         //category of target offer
         $catId = Product::all()->random()->category->id;
@@ -50,11 +49,11 @@ class HomeController extends Controller
                 //The offer in percentage
                 "offer" => $offerOG,
                 //the after price
-                "afterPrice" => ($product->prix * $offer)
+                "afterPrice" => round($product->price * $offer, 2)
             ];
         }
 
-        return view('home', [
+        return view('home.home', [
             "offers" => $final,
             "category" => $category
         ]);

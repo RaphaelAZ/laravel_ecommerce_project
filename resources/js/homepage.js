@@ -2,7 +2,8 @@ import Glide, { Controls, Breakpoints, Autoplay } from '@glidejs/glide/dist/glid
 
 new Glide('#glide', {
     type: 'carousel',
-    perPage: 2,
-    autoplay: 5000,
+    perView: 3,
+    //autoplay: 5000,
+    rewind: true,
     hoverpause: true,
 }).mount({ Controls, Breakpoints, Autoplay });
