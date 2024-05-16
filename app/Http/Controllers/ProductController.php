@@ -32,8 +32,6 @@ class ProductController extends Controller
         $materials = Material::all()->pluck('wording', 'code');
         $categories = Category::all()->pluck('name', 'id');
 
-        //dd($brands, $materials, $categories);
-
         $q->with(['brand','material','category']);
 
         $products = $q->paginate(15);

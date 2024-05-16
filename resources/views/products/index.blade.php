@@ -7,8 +7,8 @@
             Produits
         </h1>
 
-        <section id="filters" class="container relative mx-auto">
-            <button type="button" id="target-btn" class="btn btn-primary w-fit">
+        <section id="filters" class="container relative">
+            <button type="button" id="target-btn" class="btn btn-primary w-fit ml-10">
                 <iconify-icon icon="mdi:filter"></iconify-icon>
                 Filtres
             </button>
@@ -17,7 +17,7 @@
                 method="POST"
                 action="{{ route('products.filters.result') }}"
                 id="target-filters"
-                class="border-blue-700 bg-blue-200 rounded border-4 hidden grid-cols-3 p-8 gap-8"
+                class="border-gray-600 bg-blue-200 rounded border-2 hidden grid-cols-3 p-8 gap-8 mx-10"
             >
                 @CSRF
 

@@ -37,6 +37,6 @@ class Product extends Model
             Order::class,
             'order_detail',
         )->withPivot(['quantity', "product_id"]);
-        //avec la colone quantite, sans commande_id
+        //avec la colone quantity, sans commande_id
     }
 }

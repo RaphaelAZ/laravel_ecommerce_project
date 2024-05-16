@@ -17,8 +17,8 @@
 
             @auth
                 @if(\App\Helpers\Basket::inBasket($product))
-                    <span class="chip w-fit flex" title="{{ \App\Helpers\Basket::getItem($product)->quantite }} dans le panier">
-                        {{ \App\Helpers\Basket::getItem($product)->quantite }}
+                    <span class="chip w-fit flex" title="{{ \App\Helpers\Basket::getItem($product)->quantity }} dans le panier">
+                        {{ \App\Helpers\Basket::getItem($product)->quantity }}
                         <iconify-icon class="ml-2" class="inline-block" icon="mdi:cart"></iconify-icon>
                     </span>
                 @endif

@@ -58,7 +58,7 @@ class OrderController extends Controller
                 Basket::resetBasket();
 
                 return redirect()->route('orders.index')
-                    ->with("message", "Votre order a bien été enregistrée");
+                    ->with("message", "Votre commande a bien été enregistrée");
             } else {
                 throw new Exception("Cock");
             }

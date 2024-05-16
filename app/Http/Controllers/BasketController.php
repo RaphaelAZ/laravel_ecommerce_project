@@ -35,7 +35,7 @@ class BasketController extends Controller
             }
             //Si l'article n'est pas dans le panier, alors l'ajouter
             if(!Basket::inBasket($target)) {
-                Basket::addItem($target, $request->quantite);
+                Basket::addItem($target, $request->quantity);
             }
         } catch (Exception|Throwable $e) {} finally {
             //Dans tous les cas rediriger vers la route du produit.
@@ -74,7 +74,7 @@ class BasketController extends Controller
             $target = Product::find($request->get('id'));
             //Si le panier existe, supprimer l'item
             if(Basket::exists()) {
-                Basket::editItem($target, $request->get('quantite'));
+                Basket::editItem($target, $request->get('quantity'));
             }
         } catch (Exception|Throwable $e) {} finally {
             //Dans tous les cas rediriger vers la route du produit.

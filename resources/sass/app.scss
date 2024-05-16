@@ -19,7 +19,8 @@
         @apply rounded font-bold py-2 px-4 border-b-4;
 
         &.btn-primary {
-            @include applyBtn("blue");
+            @apply bg-btn_primary text-btn_font_color;
+            // @include applyBtn("blue");
         }
 
         &.btn-danger {
@@ -35,7 +36,7 @@
         @apply relative grid select-none items-center rounded-lg bg-gray-900 py-1.5 px-3 font-bold text-white;
 
         &.chip-primary {
-            @apply bg-blue-500;
+            @apply bg-btn_primary;
         }
     }
 

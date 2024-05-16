@@ -53,7 +53,7 @@ class Order extends Model
             Product::class,
             'order_detail',
         )->withPivot(['quantity', "product_id"]);
-        //avec la colone quantite, sans commande_id
+        //avec la colone quantity, sans commande_id
 
     }
 
@@ -93,7 +93,7 @@ class Order extends Model
             $toInsert = [
                 "order_id" => $codeCommande,
                 "product_id" => $item->product->id,
-                "quantity" => $item->quantite,
+                "quantity" => $item->quantity,
                 "created_at" => $now->format("Y-m-d H:i:s"),
                 "updated_at" => $now->format("Y-m-d H:i:s"),
             ];

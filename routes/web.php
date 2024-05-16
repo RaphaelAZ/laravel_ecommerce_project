@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\UsersManagementController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\Admin\ProductsManagementController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\CheckRole;
 use Illuminate\Support\Facades\Auth;
@@ -25,7 +26,7 @@ Route::controller(CommentController::class)->prefix('contact')->group(function (
 //Gestion de l'authentification
 Route::middleware(['auth'])->group(function () {
     //Gestion de la page de mon compte
-    Route::get('/moncompte', [UserController::class, 'index'])->name('account');
+    Route::get('moncompte', [UserController::class, 'index'])->name('account');
 
     //Gestion du panier
     Route::controller(BasketController::class)->prefix('panier')->group(function () {
@@ -43,9 +44,18 @@ Route::middleware(['auth'])->group(function () {
     });
 
     //Gestion de l'administration
-    Route::controller(AdminController::class)->prefix('dashboard')->middleware(CheckRole::class . ':admin')->group(function () {
+    Route::controller(AdminController::class)->prefix('admin')->middleware(CheckRole::class . ':admin')->group(function () {
         Route::get('', [AdminController::class, 'dashboard'])->name('dashboard');
-        Route::get('users', [UsersManagementController::class, 'usersManagement'])->name('users-management');
+        Route::get('utilisateurs', [UsersManagementController::class, 'index'])->name('users-management');
+
+        Route::controller(ProductsManagementController::class)->prefix('produits')->group(function () {
+            Route::get('', 'index')->name('products-management');
+            Route::get("/ajouter", 'add')->name("product-add");
+            Route::get("{product}", 'edit')->name("product-edit");
+
+            Route::post("update/{product}", 'delete')->name("product-update");
+            Route::post("delete/{product}", 'delete')->name("product-delete");
+        });
     });
 });
 

@@ -7,7 +7,7 @@ use App\Models\User;
 
 class UsersManagementController extends Controller
 {
-    public function usersManagement() {
+    public function index() {
         $user = new User();
         $users = $user->all();
         return view('admin.users.index', compact('users'));

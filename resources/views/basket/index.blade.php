@@ -39,7 +39,7 @@
                         @if(!empty($item))
                             @include('basket.line', [
                                 'product' => $item->product,
-                                'quantite' => $item->quantite,
+                                'quantity' => $item->quantity,
                                 'itemNo' => $index + 1,
                             ])
                         @endif

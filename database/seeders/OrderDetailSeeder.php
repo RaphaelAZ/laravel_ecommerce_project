@@ -24,17 +24,17 @@ class OrderDetailSeeder extends Seeder
 
             for ($i = 0; $i < random_int(1, 5); $i++) {
                 $product = Product::all()->random();
-                $quantite = random_int(1, 10);
+                $quantity = random_int(1, 10);
 
                 DB::table('order_detail')->insert([
                     "order_id" => $commande->id,
                     "product_id" => $product->id,
-                    "quantity" => $quantite,
+                    "quantity" => $quantity,
                     "created_at" => now(),
                     "updated_at" => now(),
                 ]);
 
-                $total += $quantite * $product->price;
+                $total += $quantity * $product->price;
             }
 
             $commande->update([

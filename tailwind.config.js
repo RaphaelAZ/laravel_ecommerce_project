@@ -11,8 +11,10 @@ module.exports = {
     theme: {
         extend: {},
         colors: {
-            primary: "#723b0b",
-            sec: "#5c7fe6"
+            primary: "#60495A",
+            sec: "#F3DFA2",
+            btn_primary: "#7EBDC2",
+            btn_font_color: "#EFE6DD"
         },
     },
     variants: {

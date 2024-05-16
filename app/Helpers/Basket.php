@@ -61,7 +61,7 @@ class Basket
         if($qty > 0) {
             $push = new stdClass();
             $push->product = $product;
-            $push->quantite = $qty;
+            $push->quantity = $qty;
 
             session()->push('basket', $push);
         }
@@ -152,7 +152,7 @@ class Basket
     public static function getItemTotal(Product $target): float
     {
         return round(
-            $target->price * Basket::getItem($target)->quantite,
+            $target->price * Basket::getItem($target)->quantity,
             2
         );
     }
@@ -160,25 +160,25 @@ class Basket
     /**
      * Edite la quantité d'un item
      * @param Product $target
-     * @param int $newQte
+     * @param int $newQty
      * @return void
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
-    public static function editItem(Product $target, int $newQte): void
+    public static function editItem(Product $target, int $newQty): void
     {
-        if($newQte <= 0) {
+        if($newQty <= 0) {
             Basket::removeItem($target);
         } else {
             //Prise de l'item
             $item = Basket::getItem($target);
-            //Modifier sa qte
-            $item->quantite = $newQte;
+            //Modifier sa qty
+            $item->quantity = $newQty;
 
 
-            $after = array_map(function($val) use ($newQte, $target) {
+            $after = array_map(function($val) use ($newQty, $target) {
                 if($target->id === $val->product->id) {
-                    $val->quantite = $newQte;
+                    $val->quantity = $newQty;
                 }
 
                 return $val;
@@ -198,7 +198,7 @@ class Basket
     public static function getSubTotal($returnNum = false)
     {
         $total = array_reduce(Basket::getAll(), function($carry, $item) {
-            $carry += $item->quantite * $item->product->price;
+            $carry += $item->quantity * $item->product->price;
             return $carry;
         }, 0);
 
