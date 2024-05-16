@@ -11,9 +11,6 @@
             <a class="block h-fit" href="{{ route('users-management') }}">
                 Utilisateurs
             </a>
-            <a class="block h-fit" href="{{ route('products-management') }}">
-                Articles
-            </a>
             <a class="block h-fit" href="{{ route('dashboard') }}">
                 Coupons
             </a>

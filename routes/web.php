@@ -49,12 +49,11 @@ Route::middleware(['auth'])->group(function () {
         Route::get('utilisateurs', [UsersManagementController::class, 'index'])->name('users-management');
 
         Route::controller(ProductsManagementController::class)->prefix('produits')->group(function () {
-            Route::get('', 'index')->name('products-management');
-            Route::get("/ajouter", 'add')->name("product-add");
-            Route::get("{product}", 'edit')->name("product-edit");
+            Route::get("/ajouter", 'add')->name("product.add");
+            Route::get("{product}", 'edit')->name("product.edit");
 
-            Route::post("update/{product}", 'delete')->name("product-update");
-            Route::post("delete/{product}", 'delete')->name("product-delete");
+            Route::post('update/{product}', 'update')->name("product.update");
+            Route::post("delete/{product}", 'delete')->name("product.delete");
         });
     });
 });

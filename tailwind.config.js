@@ -17,7 +17,7 @@ module.exports = {
                 300: "#366366",
                 400: "#7EBDC2"
             },
-            btn_font_color: "#ffffff"
+            btn_font_color: "#FFFFFF"
         },
     },
     variants: {

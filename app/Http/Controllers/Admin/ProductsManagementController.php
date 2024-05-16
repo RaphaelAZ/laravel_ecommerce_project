@@ -7,86 +7,83 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Material;
 use App\Models\Product;
+use Exception;
 use Illuminate\Http\Request;
+use Throwable;
 
 class ProductsManagementController extends Controller
 {
-    public function index() {
-        $products = Product::paginate(15);
+    public function edit(int $id) {
+        $product = Product::findOrFail($id);
         $q = Product::query();
 
-        $brands = Brand::all()->pluck('wording', 'code');
-        $materials = Material::all()->pluck('wording', 'code');
-        $categories = Category::all()->pluck('name', 'id');
+        $brand = Brand::all()->pluck('wording', 'code');
+        $material = Material::all()->pluck('wording', 'code');
+        $category = Category::all()->pluck('name', 'id');
 
         $q->with(['brand','material','category']);
 
-        $products = $q->paginate(15);
-
-        return view("admin.products.index", [
-            "brands" => $brands,
-            "materials" => $materials,
-            "categories" => $categories,
-            "products" => $products,
+        return view("admin.products.edit", [
+            "brands" => $brand,
+            "materials" => $material,
+            "categories" => $category,
+            "product" => $product,
         ]);
-    }
-
-    public function edit(Request $request) {
-        // $product = Product::findOrFail($request->get('id'));
-        // dd($product);
-        // $q = Product::query();
-
-        // $brand = Brand::all()->pluck('wording', 'code');
-        // $material = Material::all()->pluck('wording', 'code');
-        // $category = Category::all()->pluck('name', 'id');
-
-        // $q->with(['brand','material','category']);
-
-        // $product = $q->paginate(15);
-
-        // return view("admin.products.edit", [
-        //     "brands" => $brand,
-        //     "materials" => $material,
-        //     "categories" => $category,
-        //     "product" => $product,
-        // ]);
     }
 
     public function add(Request $request) {}
 
-    public function update(Request $request) {
-        // try {
-        //     //Si la req n'est pas POST
-        //     throw_if(!$request->isMethod('POST'));
+    public function update(Request $request,int $id) {
+        try {
+            throw_if(!$request->isMethod('POST'));
 
-        //     $request->validate([
-        //         'name' => 'required|string',
-        //         'email' => 'required|email',
-        //         'message' => 'required|string',
-        //     ]);
-        //     $comment = new Comment();
-        
-        //     $comment->name = $request->input('name');
-        //     $comment->email = $request->input('email');
-        //     $comment->comment = $request->input('message');
-        
-        //     $comment->save();
-        // } catch (Exception|Throwable $e) {} 
-        // finally {
-        //     return redirect()->back()->with('throwBack','Votre demande de contact a bien été prise en compte.');
-        // }
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'description' => 'required|string',
+                'stock' => 'required|integer',
+                'price' => 'required|numeric',
+                'height' => 'required|numeric',
+                'length' => 'required|numeric',
+                'width' => 'required|numeric',
+                'usage' => 'required|string',
+                'material' => 'nullable|string',
+                'brand' => 'nullable|string',
+                'category' => 'nullable|string',
+            ]);
+
+            dd($request->select('material'));
+
+            $oldProduct = Product::findOrFail($id);
+
+            $oldProduct->name = $request->get('name');
+            $oldProduct->description = $request->get('description');
+            $oldProduct->stock = $request->get('stock');
+            $oldProduct->price = $request->get('price');
+            $oldProduct->height = $request->get('height');
+            $oldProduct->length = $request->get('length');
+            $oldProduct->width = $request->get('width');
+            $oldProduct->usage = $request->get('usage');
+            $oldProduct->material->id = $request->get('material');
+            $oldProduct->brand->id = $request->get('brand');
+            $oldProduct->category->id = $request->get('category');
+
+            // dd($oldProduct);
+
+            $oldProduct->save();
+        } catch (Exception|Throwable $e) {} finally {
+            return redirect()->back()->with('throwBack','L\'article a bien été mis à jour.');
+        }
     }
 
-    public function delete(Request $request) {
-        // try {
-        //     //Si la req n'est pas POST
-        //     throw_if(!$request->isMethod('POST'));
+    public function delete(Request $request,int $id) {
+        try {
+            throw_if(!$request->isMethod('POST'));
 
-        //     $product = new Product();
-        //     $product->delete();
-        // } catch (Exception|Throwable $e) {} 
-        // finally {
-        //     return redirect()->back()->with('throwBack','L\'article a bien été supprimé.');
-        // }
+            $product = Product::findOrFail($id);
+            $product->delete();
+        } catch (Exception|Throwable $e) {} 
+        finally {
+            return redirect()->back()->with('throwBack','L\'article a bien été supprimé.');
+        }
     }
 }

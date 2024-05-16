@@ -1,6 +1,4 @@
-<a href="{{ route('products.show', $product->id) }}"
-   class="max-w-sm rounded overflow-hidden shadow-lg block"
->
+<div class="max-w-sm rounded overflow-hidden shadow-lg block">
     <!--container carte-->
     <article class="px-6 py-4">
 
@@ -54,8 +52,19 @@
             </div>
         </div>
 
-        <div class="mt-4">
-            <span class="btn btn-primary">Voir</span>
+        <div class="mt-6 mb-4 flex space-between gap-2 justify-center">
+            <a href="{{ route('products.show', $product->id) }}">
+                <span class="btn btn-primary">Voir</span>
+            </a>
+            <a href="{{ route('product.edit', $product->id) }}">
+                <span class="btn btn-warning"><iconify-icon icon="ph:pen"></iconify-icon></span>
+            </a>
+            <form action="{{route('product.delete', $product->id)}}" method="POST">
+            @csrf
+                <button type="submit" class="btn btn-danger">
+                    <iconify-icon icon="ph:trash"></iconify-icon>
+                </button>
+            </form>
         </div>
     </article>
-</a>
+</div>

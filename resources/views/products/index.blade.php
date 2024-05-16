@@ -8,6 +8,11 @@
         </h1>
 
         <section id="filters" class="container relative">
+            @if(session('throwBack'))
+                <div class="bg-green-200 text-green-800 border border-green-600 px-4 py-2 rounded relative" role="alert">
+                    {{ session('throwBack') }}
+                </div>
+            @endif
             <button type="button" id="target-btn" class="btn btn-primary w-fit ml-10">
                 <iconify-icon icon="mdi:filter"></iconify-icon>
                 Filtres
@@ -85,7 +90,7 @@
 
         <hr class="my-3">
 
-        <section id="products" class="grid grid-cols-5 gap-4">
+        <section id="products" class="grid grid-cols-5 gap-5">
             @foreach($products as $index => $product)
                 @include('products.card', ["product" => $product])
             @endforeach
