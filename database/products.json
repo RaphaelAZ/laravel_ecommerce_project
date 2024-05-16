@@ -1,0 +1,112 @@
+{
+    "1": {
+        "name": "Table biche",
+        "description": "Une table toute douce avec des pieds de vraie biche.",
+        "price": 59.99,
+        "image": "public/img/products/biche.jpg",
+        "stock": 50,
+        "height": 40,
+        "width": 60,
+        "length": 50,
+        "usage": "Poser des objets dessus"
+      },
+    "2": {
+        "name": "Chaise hibou",
+        "description": "Une chaise confortable avec un dossier en forme de hibou.",
+        "price": 79.99,
+        "image": "public/img/products/hibou.jpg",
+        "stock": 30,
+        "height": 80,
+        "width": 50,
+        "length": 50,
+        "usage": "S'asseoir confortablement"
+      },
+    "3": {
+        "name": "Lampe renard",
+        "description": "Une lampe de bureau avec un abat-jour en forme de tête de renard.",
+        "price": 39.99,
+        "image": "public/img/products/renard.jpg",
+        "stock": 40,
+        "height": 30,
+        "width": 20,
+        "length": 20,
+        "usage": "Éclairage d'appoint"
+    },
+    "4": {
+        "name": "Fauteuil licorne",
+        "description": "Un fauteuil rembourré avec une corne de licorne sur le dossier.",
+        "price": 129.99,
+        "image": "public/img/products/licorne.jpg",
+        "stock": 25,
+        "height": 100,
+        "width": 80,
+        "length": 90,
+        "usage": "Se détendre comme une licorne"
+    },
+    "5": {
+        "name": "Tapis chat",
+        "description": "Un tapis en forme de tête de chat avec des oreilles et une queue.",
+        "price": 49.99,
+        "image": "public/img/products/chat.jpg",
+        "stock": 35,
+        "height": 60,
+        "width": 100,
+        "length": 2,
+        "usage": "Décoration de sol originale"
+      },
+    "6": {
+        "name": "Masque facial de volcan",
+        "description": "Un masque facial fabriqué en forme de volcan riche en minéraux.",
+        "price": 29.99,
+        "image": "public/img/products/volcan.jpg",
+        "stock": 40,
+        "height": 15,
+        "width": 10,
+        "length": 5,
+        "usage": "Se taper la honte"
+    },
+    "7": {
+        "name": "Bébé enceinte",
+        "description": "Le premier bébé enceinte que vous verrez et le dernier également.",
+        "price": 19.99,
+        "image": "public/img/products/bebe-enceinte.jpg",
+        "stock": 50,
+        "height": 12,
+        "width": 3,
+        "length": 2,
+        "usage": "Corrompore son esprit"
+    },
+    "8": {
+        "name": "Couteau à beurre perroquet",
+        "description": "Un couteau à beurre qui mettra de la couleur dans votre vie.",
+        "price": 14.99,
+        "image": "public/img/products/couteau.jpg",
+        "stock": 20,
+        "height": 10,
+        "width": 3,
+        "length": 15,
+        "usage": "Tartiner du beurre ou des tartinades"
+    },
+    "9": {
+        "name": "Ouvre-bouteille crâne",
+        "description": "Un ouvre-bouteille qui a les crocs.",
+        "price": 9.99,
+        "image": "public/img/products/poing.jpg",
+        "stock": 30,
+        "height": 8,
+        "width": 6,
+        "length": 3,
+        "usage": "Ouvrir des bouteilles de manière cool ou presque"
+      },
+      "10": {
+        "name": "Masque de Tortue Ninja",
+        "description": "Un masque confortable avec le visage d'une Tortue Ninja pour des aventures héroïques.",
+        "price": 12.99,
+        "image": "public/img/products/tortue.jpg",
+        "stock": 25,
+        "height": 15,
+        "width": 20,
+        "length": 2,
+        "usage": "Vivre comme une tortue ninja"
+      }
+}
