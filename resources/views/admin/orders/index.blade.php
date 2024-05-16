@@ -5,7 +5,7 @@
     <div class="mt-5 mx-5 grid gap-y-24">
         @foreach($orders as $state => $allOrders)
             <div class="">
-                <h1 class="text-center text-3xl font-bold">{{ $state }}</h1>
+                <h1 class="text-center text-3xl font-bold"> {{ count($allOrders) }} {{ $state }}</h1>
 
                 <table class="min-w-full border-gray-700 bg-white shadow-md rounded-lg overflow-hidden mb-5">
                     <thead class="bg-gray-800 text-white">

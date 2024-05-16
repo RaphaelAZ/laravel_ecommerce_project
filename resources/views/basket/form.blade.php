@@ -3,27 +3,72 @@
     use App\Helpers\Basket;
 @endphp
 
+@if(Basket::numberOfItems() > 0)
 <section id="payment" class="bg-white py-8 antialiased dark:bg-gray-900 md:py-16">
     <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
         <div class="mx-auto max-w-5xl">
+
+            @if(session()->has("coupon_state"))
+                @if(session('coupon_state'))
+                    @include('components.alert', [
+                        "color" => "green",
+                        "text" => "Coupon bien appliqué.",
+                    ])
+                @else
+                    @include('components.alert', [
+                        "color" => "red",
+                        "title" => "Ouch !",
+                        "text" => "Le coupon n'est plus valide ou n'existe pas.",
+                    ])
+                @endif
+
+                @php session()->remove('coupon_state') @endphp
+            @endif
+
+            @if(!Basket::codeApplied())
+                <form
+                    method="POST"
+                    action="{{ route('basket.apply') }}"
+                    class="flex w-full h-fit my-8 items-end gap-x-4"
+                >
+                    @csrf
+
+                    <!--container coupon code-->
+                    <div class="col-start-1 col-end-3">
+                        @include('components.input', [
+                            "id" => "coupon",
+                            "label" => "Coupon",
+                            "type" => "text",
+                            "name" => "coupon",
+                            "placeholder" => "Votre coupon"
+                        ])
+                    </div>
+
+                    <!--button submit-->
+                    <button class="btn btn-green flex">
+                        <iconify-icon icon="mdi:send"></iconify-icon>
+                        Envoyer
+                    </button>
+                </form>
+            @endif
+
             <h2 class="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">Paiement</h2>
 
             <div class="mt-6 sm:mt-8 lg:flex lg:items-start lg:gap-12">
-
                 <form method="POST" action="{{ route('orders.add') }}"
                       class="w-full rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 sm:p-6 lg:max-w-xl lg:p-8">
                     @CSRF
                     <div class="mb-6 grid grid-cols-2 gap-4">
-
                         <!--Num carte container-->
                         <div class="col-start-1 col-end-3">
-                            <label for="card-number-input"
-                                   class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"> Numéro de carte
-                                <span class="text-red-600">*</span> </label>
-                            <input type="text" id="card-number-input"
-                                   name="nbr-carte"
-                                   class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pe-10 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500  dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
-                                   placeholder="xxxx xxxx xxxx xxxx" required/>
+                            @include('components.input', [
+                                "id" => "card-number-input",
+                                "label" => "Numéro de carte",
+                                "required" => true,
+                                "type" => "text",
+                                "name" => "nbr-carte",
+                                "placeholder" => "xxxx xxxx xxxx xxxx"
+                            ])
                         </div>
 
                         <!--Date expiration-->
@@ -45,14 +90,14 @@
 
                         <!--CCV container-->
                         <div>
-                            <label for="cvv-input"
-                                   class="mb-2 flex items-center gap-1 text-sm font-medium text-gray-900 dark:text-white">
-                                CVV <span class="text-red-600">*</span>
-                            </label>
-                            <input type="number" id="cvv-input" aria-describedby="helper-text-explanation"
-                                   class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
-                                   name="ccv"
-                                   placeholder="•••" required/>
+                            @include('components.input', [
+                                "id" => "cvv-input",
+                                "label" => "CVV",
+                                "required" => true,
+                                "type" => "number",
+                                "name" => "ccv",
+                                "placeholder" => "•••",
+                            ])
                         </div>
                     </div>
 
@@ -74,8 +119,13 @@
                             </dl>
 
                             <dl class="flex items-center justify-between gap-4">
-                                <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Code de réduction</dt>
-                                <dd class="text-base font-medium text-green-500">-0,00 €</dd>
+                                <dt class="text-base font-normal text-gray-500 dark:text-gray-400">
+                                    Code de réduction <br/>
+                                    @if(Basket::codeApplied())
+                                        (Code {{ session()->get('discount_code') }})
+                                    @endif
+                                </dt>
+                                <dd class="text-base font-medium text-green-500 w-fit inline-block">-{{ Basket::getDiscountedPrice() }} €</dd>
                             </dl>
 
                             <dl class="flex items-center justify-between gap-4">
@@ -106,3 +156,4 @@
         </div>
     </div>
 </section>
+@endif

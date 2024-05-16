@@ -19,9 +19,8 @@
                         <p>Code commande <span class="font-bold">{{ $order->id }}</span></p>
                         <p>Total <span class="font-bold">{{ str_replace(".",",",$order->total) }} €</span></p>
                         <p>Nbr Items <span class="font-bold">{{ sizeof($order->products) }}</span></p>
-                        <p>Etat <span class="font-bold">{{ $order->etat['state'] }}</span></p>
+                        <p>Etat <span class="font-bold">{{ optional($order->etat ?? $order)->state }}</span></p>
                         <p>Date <span class="font-bold">{{ \App\Helpers\Dates::clean($order->date) }}</span></p>
-
                         <button type="button" class="btn btn-primary" data-el="plus">
                             <iconify-icon icon="mdi:plus"></iconify-icon>
                         </button>
@@ -49,7 +48,7 @@
                         <tbody>
                             @foreach($order->products as $i => $product)
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                    <td class="px-6 py-4">
+                                    <td class="px-6 py-4 underline">
                                         <a href="{{ route('products.show', $product) }}">{{ $product->name }}</a>
                                     </td>
                                     <td class="px-6 py-4">

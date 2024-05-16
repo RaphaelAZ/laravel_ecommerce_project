@@ -81,4 +81,25 @@ class BasketController extends Controller
             return redirect()->back();
         }
     }
+
+    /**
+     * Apply the reduction code
+     * @return RedirectResponse
+     * @throws Exception
+     */
+    public function apply(Request $request)
+    {
+        $code = $request->get('coupon');
+        //if code is valid
+        $valid = Basket::codeValid($code);
+        //then we apply the code
+        if($valid) {
+            Basket::applyCode($code);
+        }
+
+        session()->flash("coupon_state", $valid);
+
+        return redirect()
+            ->back();
+    }
 }

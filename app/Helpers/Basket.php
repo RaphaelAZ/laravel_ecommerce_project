@@ -2,7 +2,9 @@
 
 namespace App\Helpers;
 
+use App\Models\Coupon;
 use App\Models\Product;
+use DateTimeImmutable;
 use Illuminate\Support\Facades\Auth;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -189,6 +191,26 @@ class Basket
     }
 
     /**
+     * Gets the total with the discount applied
+     * @param bool $returnNum
+     * @return string|float
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
+    public static function getTotalWithDiscount($returnNum = false)
+    {
+        $preFinal = Basket::getSubTotal(true) - Basket::getDiscountedPrice(true);
+        $final = round($preFinal, 2);
+
+        if($returnNum) {
+            return $final;
+        } else {
+            return str_replace(".",",", $final);
+        }
+    }
+
+
+    /**
      * Donne le total du basket (string)
      * @param bool $returnNum Retourne le chiffre plutôt que le string formaté.
      * @return string|int
@@ -218,7 +240,7 @@ class Basket
      */
     public static function getTVA($returnNum = false)
     {
-        $final = round(Basket::getSubTotal(true) * 0.2,2);
+        $final = round(Basket::getTotalWithDiscount(true) * 0.2,2);
 
         if($returnNum) {
             return $final;
@@ -239,8 +261,9 @@ class Basket
     {
         $tva = Basket::getTVA(true);
         $sub = Basket::getSubTotal(true);
+        $discount = Basket::getDiscountedPrice(true);
 
-        $final = round($sub + $tva + 9.99,2);
+        $final = round($sub - $discount + $tva + 9.99,2);
 
         if($returnNum) {
             return $final;
@@ -257,5 +280,78 @@ class Basket
     {
         session()->remove('basket');
         Basket::createBasket();
+    }
+
+    /**
+     * Check if coupon code exists and his date is still valid
+     * @param string $code
+     * @return bool
+     * @throws \Exception
+     */
+    public static function codeValid(string $code): bool
+    {
+        $coupon = Coupon::where('code', $code);
+
+        if($coupon->exists()) {
+            //date of the coupon
+            $date = new DateTimeImmutable($coupon->first()->expiration);
+            $now = new DateTimeImmutable();
+
+            return $date >= $now;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Check if the discount code is applied
+     * @return bool
+     */
+    public static function codeApplied(): bool
+    {
+        return session()->has('discount_code');
+    }
+
+    /**
+     * Returns the discounted price
+     * @param bool $returnNum
+     * @return float|string
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     * @throws \Exception
+     */
+    public static function getDiscountedPrice(bool $returnNum = false)
+    {
+        $final = 0;
+
+        if(session()->has('discount_code')) {
+            $codeStr = session()->get('discount_code');
+
+            if(Basket::codeValid($codeStr)) {
+                //last code published
+                $code = Coupon::where('code', $codeStr)
+                    ->orderBy('updated_at', 'DESC')
+                    ->first();
+
+                $percentage = ($code->discount / 100);
+                $final = round($percentage * Basket::getSubTotal(true), 2);
+            }
+        }
+
+        if($returnNum) {
+            return $final;
+        } else {
+            return str_replace(".", ",", (string)$final);
+        }
+    }
+
+    /**
+     * Stores the discount code in the session
+     * @param string $code
+     * @return void
+     */
+    public static function applyCode(string $code): void
+    {
+        session()->put('discount_code', $code);
     }
 }

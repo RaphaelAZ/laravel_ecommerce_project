@@ -33,6 +33,7 @@ Route::middleware(['auth'])->group(function () {
     //Gestion du panier
     Route::controller(BasketController::class)->prefix('panier')->group(function () {
         Route::get('', 'index')->name('basket.index');
+        Route::post('apply', 'apply')->name('basket.apply');
         Route::post('add', 'add')->name('basket.add');
         Route::post('remove', 'remove')->name('basket.remove');
         Route::post('update', 'update')->name('basket.update');
@@ -72,10 +73,9 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
+//Gestion des produits
 Route::resource('produits', ProductController::class)->names('products');
 
-//Gestion des produits
 Route::prefix('produits')->group(function () {
     Route::post("resultat", [ProductController::class, 'filters'])->name("products.filters.result");
-    Route::get("/categorie/{category}", [ProductController::class, 'category'])->name("products.category");
 });

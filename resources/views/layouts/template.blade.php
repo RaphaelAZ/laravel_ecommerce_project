@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ str_replace("_", " ", config('app.name', 'Laravel')) }}</title>
 
     <!-- Scripts -->
     <script src="{{ mix('dist/js/app.js') }}" defer></script>
@@ -39,6 +39,5 @@
     </div>
 
     @yield('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 </body>
 </html>

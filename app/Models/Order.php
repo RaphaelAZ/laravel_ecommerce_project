@@ -24,7 +24,10 @@ class Order extends Model
     protected $primaryKey = "id";
 
     protected $fillable = [
-        "state"
+        "state",
+        "date",
+        "total",
+        "coupon_id",
     ];
 
     public function getFromUser($user): Collection
@@ -71,7 +74,11 @@ class Order extends Model
             'order_detail',
         )->withPivot(['quantity', "product_id"]);
         //avec la colone quantity, sans commande_id
+    }
 
+    public function coupon(): HasOne
+    {
+        return $this->hasOne(Coupon::class, 'id');
     }
 
     /**
@@ -86,12 +93,21 @@ class Order extends Model
 
         $toInsert = [
             "id_user" => Auth::user()->id,
-            "etat" => 1,
+            "state" => 1,
             "date" => $now->format("Y-m-d"),
             "total" => Basket::getTotal(true),
             "created_at" => $now->format("Y-m-d H:i:s"),
             "updated_at" => $now->format("Y-m-d H:i:s")
         ];
+
+        if(Basket::codeApplied())
+        {
+            $code = Coupon::where('code', session('discount_code'))
+                ->orderBy('updated_at', 'DESC')
+                ->first();
+
+            $toInsert["coupon_id"] = $code->id;
+        }
 
 
         return $this->insertGetId($toInsert);

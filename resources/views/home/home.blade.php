@@ -30,14 +30,7 @@
     </h1>
 
     <h3 class="text-primary title-font text-2x text-center">
-        Catégorie
-
-        <a
-            class="text-decoration-underline"
-            href="{{ route('products.category', $category->id) }}"
-        >
-            {{ $category->name }}
-        </a>
+        Catégorie {{ $category->name }}
     </h3>
 
     <div id="glide" class="multi">
