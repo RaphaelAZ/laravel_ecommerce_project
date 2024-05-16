@@ -13,11 +13,20 @@
                     {{ session('throwBack') }}
                 </div>
             @endif
-            <button type="button" id="target-btn" class="btn btn-primary w-fit ml-10">
-                <iconify-icon icon="mdi:filter"></iconify-icon>
-                Filtres
-            </button>
+            <div class="flex flex-row space-between">
+                <button type="button" id="target-btn" class="btn btn-primary w-fit ml-10">
+                    <iconify-icon icon="mdi:filter"></iconify-icon>
+                    Filtres
+                </button>
 
+                @if(Auth::check() && Auth::user()->role === 'admin')
+                <a href="{{route('product.add')}}" class="btn btn-warning w-fit ml-10">
+                    <iconify-icon icon="ic:round-plus"></iconify-icon>
+                    Ajouter un produit
+                </a>
+                @endif
+            </div>
+            
             <form
                 method="POST"
                 action="{{ route('products.filters.result') }}"

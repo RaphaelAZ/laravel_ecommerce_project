@@ -5,7 +5,12 @@
 @endphp
 
 @section('content')
-    <form action="{{route('product.update', $product->id)}}" method="POST">
+    @if(session('throwBack'))
+        <div class="bg-green-200 text-green-800 border border-green-600 px-4 py-2 rounded relative" role="alert">
+            {{ session('throwBack') }}
+        </div>
+    @endif
+    <form action="{{route('product.create')}}" method="POST">
     @csrf
         <div class="overflow-x-auto mt-5 mb-10 mx-5">
             <div>

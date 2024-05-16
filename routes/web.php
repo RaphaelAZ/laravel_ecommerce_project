@@ -54,6 +54,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get("/ajouter", 'add')->name("product.add");
             Route::get("{product}", 'edit')->name("product.edit");
 
+            Route::post('create', 'create')->name("product.create");
             Route::post('update/{product}', 'update')->name("product.update");
             Route::post("delete/{product}", 'delete')->name("product.delete");
         });
