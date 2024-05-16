@@ -26,7 +26,7 @@
                     <td class="border border-gray-300 py-2 px-4">{{ $product->stock }}</td>
                     <td class="border border-gray-300 py-2 px-4">{{ $product->price }}</td>
                     <td class="border border-gray-300 py-2 px-4">{{ $product->height }}</td>
-                    <td claass="border border-gray-300 py-2 px-4">{{ $product->length }}</td>
+                    <td class="border border-gray-300 py-2 px-4">{{ $product->length }}</td>
                     <td class="border border-gray-300 py-2 px-4">{{ $product->width }}</td>
                     <td class="border border-gray-300 py-2 px-4">{{ $product->usage }}</td>
                     <td class="border border-gray-300 py-2 px-4">{{ optional($product->material)->wording }}</td>
