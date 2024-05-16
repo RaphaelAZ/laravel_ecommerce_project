@@ -8,6 +8,7 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -50,19 +51,19 @@ class Order extends Model
             ->get();
     }
 
-    public function etat(): HasOne
+    public function etat(): BelongsTo
     {
-        return $this->hasOne(
+        return $this->belongsTo(
             OrderState::class,
-            'id'
+            'state'
         );
     }
 
-    public function user(): HasOne
+    public function user(): BelongsTo
     {
-        return $this->hasOne(
+        return $this->belongsTo(
             User::class,
-            'id'
+            'id_user'
         );
     }
 

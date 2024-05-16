@@ -56,6 +56,7 @@ class OrderController extends Controller
                 $order->insertDetails($codeCommande, Basket::getAll());
 
                 Basket::resetBasket();
+                Basket::resetCode();
 
                 return redirect()->route('orders.index')
                     ->with("message", "Votre commande a bien été enregistrée");

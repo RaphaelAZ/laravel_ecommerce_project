@@ -354,4 +354,9 @@ class Basket
     {
         session()->put('discount_code', $code);
     }
+
+    public static function resetCode():void
+    {
+        session()->remove('discount_code');
+    }
 }

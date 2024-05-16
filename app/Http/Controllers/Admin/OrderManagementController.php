@@ -15,7 +15,7 @@ class OrderManagementController extends Controller
         //All possible order states
         $final = array();
         foreach (OrderState::all() as $index => $st) {
-            $final[$st->state] = Order::where("state", $st->id)->get();
+            $final[$st->state] = Order::with('user')->where("state", $st->id)->get();
         }
 
         return view("admin.orders.index", [
@@ -57,7 +57,7 @@ class OrderManagementController extends Controller
         $orderStates = OrderState::all();
         //rules for changing
         $rules = [
-            "__order_id" => "required|numeric|in:" . $orderStates->implode('id',', '),
+            "__order_id" => "required|numeric",
             "curr_state" => "required|numeric",
         ];
         //validation

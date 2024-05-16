@@ -19,9 +19,10 @@
                     </thead>
                     <tbody class="text-gray-700">
                     @foreach($allOrders as $index => $order)
+
                         <tr class="*:border *:border-gary-300 *:py-2 *:px-4">
                             <td>{{ $order->id }}</td>
-                            <td>{{ $order->user->name }}</td>
+                            <td>{{ optional($order->user)->name }}</td>
                             <td>{{ $order->total }} €</td>
                             <td>{{ \App\Helpers\Dates::clean($order->created_at, true) }}</td>
                             <td>
