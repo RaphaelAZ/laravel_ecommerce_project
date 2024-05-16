@@ -16,10 +16,6 @@ class ProductFactory extends Factory
      */
     public function definition()
     {
-        $units = [
-            "mm","cm","dm","m",
-        ];
-
         return [
             'name' => $this->faker->words(random_int(1, 3), true),
             'description' => $this->faker->paragraph(),

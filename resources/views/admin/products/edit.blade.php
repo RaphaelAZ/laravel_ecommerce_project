@@ -41,38 +41,32 @@
                 <input type="text" value="{{$product->usage}}" name="usage" id="usage" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
             </div>
             <div>
-                <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Matériau:</label>
-                <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    @foreach($materials as $index => $item)
-                        @if($product->material === $item)
-                            <option value="{{$item}}">{{$item}}</option>
-                        @else
-                            <option value="{{$item}}" selected>{{$item}}</option>
-                        @endif
+                <label for="material" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Matériau:</label>
+                <select id="material" name="material" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    @foreach($materials as $index => $material)
+                        <option value="{{ $index }}" {{ $product->id_material == $index ? 'selected' : '' }}>
+                            {{ $material }}
+                        </option>
                     @endforeach
                 </select>
             </div>
             <div>
-                <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Marque:</label>
-                <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    @foreach($brands as $index => $item)
-                        @if($product->brand === $item)
-                            <option value="{{$item}}">{{$item}}</option>
-                        @else
-                            <option value="{{$item}}" selected>{{$item}}</option>
-                        @endif
+                <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Marque:</label>
+                <select id="brand" name="brand" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    @foreach($brands as $index => $brand)
+                        <option value="{{ $index }}" {{ $product->id_brand == $index ? 'selected' : '' }}>
+                            {{ $brand }}
+                        </option>
                     @endforeach
                 </select>
             </div>
             <div>
-                <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Catégorie:</label>
-                <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    @foreach($categories as $index => $item)
-                        @if($product->category === $item)
-                            <option value="{{$item}}">{{$item}}</option>
-                        @else
-                            <option value="{{$item}}" selected>{{$item}}</option>
-                        @endif
+                <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Catégorie:</label>
+                <select id="category" name="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    @foreach($categories as $index => $category)
+                        <option value="{{ $index }}" {{ $product->id_category == $index ? 'selected' : '' }}>
+                            {{ $category }}
+                        </option>
                     @endforeach
                 </select>
             </div>

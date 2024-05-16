@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\Dates;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Category;
@@ -9,6 +10,8 @@ use App\Models\Material;
 use App\Models\Product;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\Validator;
 use Throwable;
 
 class ProductsManagementController extends Controller
@@ -37,37 +40,35 @@ class ProductsManagementController extends Controller
         try {
             throw_if(!$request->isMethod('POST'));
 
-            $request->validate([
+            Validator::make($request->all(), [
                 'name' => 'required|string|max:255',
-                'description' => 'required|string',
-                'stock' => 'required|integer',
-                'price' => 'required|numeric',
-                'height' => 'required|numeric',
-                'length' => 'required|numeric',
-                'width' => 'required|numeric',
-                'usage' => 'required|string',
-                'material' => 'nullable|string',
-                'brand' => 'nullable|string',
-                'category' => 'nullable|string',
+                'description' => 'nullable|string',
+                'stock' => 'required|string',
+                'price' => 'required|string',
+                'height' => 'nullable|string',
+                'length' => 'nullable|string',
+                'width' => 'nullable|string',
+                'usage' => 'nullable|string',
+                'material' => 'required|string',
+                'brand' => 'required|string',
+                'category' => 'required|string',
             ]);
-
-            dd($request->select('material'));
 
             $oldProduct = Product::findOrFail($id);
 
             $oldProduct->name = $request->get('name');
             $oldProduct->description = $request->get('description');
-            $oldProduct->stock = $request->get('stock');
-            $oldProduct->price = $request->get('price');
-            $oldProduct->height = $request->get('height');
-            $oldProduct->length = $request->get('length');
-            $oldProduct->width = $request->get('width');
+            $oldProduct->stock = intval($request->get('stock'));
+            $oldProduct->price = floatval($request->get('price'));
+            $oldProduct->height = intval($request->get('height'));
+            $oldProduct->length = intval($request->get('length'));
+            $oldProduct->width = intval($request->get('width'));
             $oldProduct->usage = $request->get('usage');
-            $oldProduct->material->id = $request->get('material');
-            $oldProduct->brand->id = $request->get('brand');
-            $oldProduct->category->id = $request->get('category');
+            $oldProduct->id_material = Material::findOrFail($request->get('material'))->code;
+            $oldProduct->id_brand = Brand::findOrFail($request->get('brand'))->code;
+            $oldProduct->id_category = Category::findOrFail($request->get('category'))->id;
 
-            // dd($oldProduct);
+            // dd($oldProduct->toArray());
 
             $oldProduct->save();
         } catch (Exception|Throwable $e) {} finally {
