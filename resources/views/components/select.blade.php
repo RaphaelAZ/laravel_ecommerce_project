@@ -17,20 +17,20 @@
     @if(!empty($name)) name="{{ $name }}" @endif
     @if(isset($required) && (bool)$required===true) required @endif
 >
-    <option
-        value="__none__"
-        @if(isset($selected) && !array_key_exists($selected, $options))
-            selected
-        @endif
-    >
-        Aucun
-    </option>
+    @if($authoriseEmpty ?? false === true)
+        <option
+            value="__none__"
+            @if(isset($selected) && !array_key_exists($selected, $options))
+                selected
+            @endif
+        >
+            Aucun
+        </option>
+    @endif
 
     @foreach($options as $key => $value)
         <option
-            @if(isset($selected) && $selected==$key)
-                selected
-            @endif
+            @if(isset($selected) && $selected==$key) selected="selected" @endif
             value="{{ $key }}"
         >
             {{ $value }}

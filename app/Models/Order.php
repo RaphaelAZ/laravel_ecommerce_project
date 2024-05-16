@@ -23,6 +23,10 @@ class Order extends Model
 
     protected $primaryKey = "id";
 
+    protected $fillable = [
+        "state"
+    ];
+
     public function getFromUser($user): Collection
     {
         $id = null;
