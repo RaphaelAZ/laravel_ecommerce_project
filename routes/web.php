@@ -66,6 +66,8 @@ Route::middleware(['auth'])->group(function () {
 
         Route::controller(OrderManagementController::class)->prefix('commandes')->group(function () {
             Route::get('', "index")->name('orders.admin.index');
+            Route::get("{order}", "single")->name('orders.admin.single');
+            Route::post('change', "change")->name('orders.admin.change');
         });
     });
 });
