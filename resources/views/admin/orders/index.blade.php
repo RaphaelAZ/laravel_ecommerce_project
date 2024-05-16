@@ -9,12 +9,12 @@
 
                 <table class="min-w-full border-gray-700 bg-white shadow-md rounded-lg overflow-hidden mb-5">
                     <thead class="bg-gray-800 text-white">
-                    <tr class="*:border-l *:border-white">
-                        <th class="py-2 px-4">N°</th>
-                        <th class="py-2 px-4">Utilisateur</th>
-                        <th class="py-2 px-4">Total</th>
-                        <th class="py-2 px-4">Reçue le</th>
-                        <th class="py-2 px-4"><iconify-icon icon="mdi:gear"></iconify-icon></th>
+                    <tr class="*:border-l *:border-white *:py-2 *:px-4">
+                        <th>N°</th>
+                        <th>Utilisateur</th>
+                        <th>Total</th>
+                        <th>Reçue le</th>
+                        <th><iconify-icon icon="mdi:gear"></iconify-icon></th>
                     </tr>
                     </thead>
                     <tbody class="text-gray-700">
