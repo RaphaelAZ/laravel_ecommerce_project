@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\ContactManagementController;
+use App\Http\Controllers\Admin\OrderManagementController;
 use App\Http\Controllers\BasketController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
@@ -54,6 +56,17 @@ Route::middleware(['auth'])->group(function () {
 
             Route::post('update/{product}', 'update')->name("product.update");
             Route::post("delete/{product}", 'delete')->name("product.delete");
+        });
+
+        Route::controller(ContactManagementController::class)->prefix('messages')->group(function () {
+            Route::get('', 'index')->name('messages.admin.index');
+            Route::get("{message}", "single")->name('messages.admin.single');
+        });
+
+        Route::controller(OrderManagementController::class)->prefix('commandes')->group(function () {
+            Route::get('', "index")->name('orders.admin.index');
+            Route::get("{order}", "single")->name('orders.admin.single');
+            Route::post('change', "change")->name('orders.admin.change');
         });
     });
 });

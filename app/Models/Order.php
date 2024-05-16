@@ -25,23 +25,36 @@ class Order extends Model
 
     public function getFromUser($user): Collection
     {
+        $id = null;
+
         if(isset($user->id))
         {
             $id = $user->id;
-
-            return $this
-                ->where('id_user', $id)
-                ->orderBy('orders.id', 'DESC')
-                ->get();
-        } else {
+        } else if(gettype($user) === 'integer') {
+            $id = $user;
+        }
+        else {
             throw new \Exception("User is not defined");
         }
+
+        return $this
+            ->where('id_user', $id)
+            ->orderBy('orders.id', 'DESC')
+            ->get();
     }
 
     public function etat(): HasOne
     {
         return $this->hasOne(
             OrderState::class,
+            'id'
+        );
+    }
+
+    public function user(): HasOne
+    {
+        return $this->hasOne(
+            User::class,
             'id'
         );
     }

@@ -16,7 +16,7 @@
 //Composants SCSS
 @layer components {
     .btn {
-        @apply rounded font-bold py-2 px-4;
+        @apply rounded font-bold py-2 px-4 border-b-4 items-center gap-x-2;
 
         &.btn-primary {
             @apply bg-btn_primary-400 text-btn_font_color border-btn_primary-300;

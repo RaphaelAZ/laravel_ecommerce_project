@@ -14,6 +14,12 @@
             <a class="block h-fit" href="{{ route('dashboard') }}">
                 Coupons
             </a>
+            <a class="block h-fit" href="{{ route('messages.admin.index') }}">
+                Messages
+            </a>
+            <a class="block h-fit" href="{{ route('orders.admin.index') }}">
+                Commandes
+            </a>
         </div>
     </div>
 </nav>
