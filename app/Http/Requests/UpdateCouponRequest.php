@@ -31,7 +31,7 @@ class UpdateCouponRequest extends FormRequest
         return [
             "code" => "required",
             "discount" => "required|numeric|min:0|max:100",
-            "expiration" => "required|after:now",
+            "expiration" => "required",
         ];
     }
 }

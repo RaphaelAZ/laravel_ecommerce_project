@@ -11,7 +11,7 @@
             <a class="block h-fit" href="{{ route('users-management') }}">
                 Utilisateurs
             </a>
-            <a class="block h-fit" href="{{ route('dashboard') }}">
+            <a class="block h-fit" href="{{ route('admin.coupons.index') }}">
                 Coupons
             </a>
             <a class="block h-fit" href="{{ route('messages.admin.index') }}">

@@ -15,7 +15,7 @@
                 <iconify-icon class="ml-2" icon="bi:person-fill"></iconify-icon>
             </a>
 
-            <a class="chip chip-primary flex w-30 mt-4" href="{{ route('dashboard') }}">
+            <a class="chip chip-primary flex w-30 mt-4" href="{{ route('admin.coupons.index') }}">
                 <span class="pb-px">Coupons</span>
                 <iconify-icon class="ml-2" icon="ph:ticket-duotone"></iconify-icon>
             </a>

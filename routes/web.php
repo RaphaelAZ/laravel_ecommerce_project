@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\ContactManagementController;
+use App\Http\Controllers\Admin\CouponManagementController;
 use App\Http\Controllers\Admin\OrderManagementController;
 use App\Http\Controllers\BasketController;
 use App\Http\Controllers\HomeController;
@@ -69,6 +70,16 @@ Route::middleware(['auth'])->group(function () {
             Route::get('', "index")->name('orders.admin.index');
             Route::get("{order}", "single")->name('orders.admin.single');
             Route::post('change', "change")->name('orders.admin.change');
+        });
+
+        Route::controller(CouponManagementController::class)->prefix('coupons')->group(function () {
+            Route::get("", "index")->name('admin.coupons.index');
+
+            Route::get('create', "create")->name('admin.coupons.create');
+            Route::post('store', "store")->name('admin.coupons.store');
+
+            Route::get("{coupon}/edit", "edit")->name('admin.coupons.edit');
+            Route::post("{coupon}/edit", "update")->name('admin.coupons.update');
         });
     });
 });
