@@ -16,7 +16,14 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        Category::factory(5)->create();
-        //
+        $allData=json_decode(
+            file_get_contents(base_path('database/category.json')
+        ),true);
+
+        foreach ($allData as $categoryJSON) {
+            $brand = new Category();
+            $brand->name = $categoryJSON;
+            $brand->save();
+        }
     }
 }

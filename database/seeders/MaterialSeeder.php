@@ -14,6 +14,14 @@ class MaterialSeeder extends Seeder
      */
     public function run()
     {
-        Material::factory(50)->create();
+        $allData=json_decode(
+            file_get_contents(base_path('database/material.json')
+        ),true);
+
+        foreach ($allData as $materialJSON) {
+            $brand = new Material();
+            $brand->wording = $materialJSON;
+            $brand->save();
+        }
     }
 }

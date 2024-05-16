@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Brand;
 use Illuminate\Database\Seeder;
+use File;
 
 class BrandSeeder extends Seeder
 {
@@ -14,7 +15,14 @@ class BrandSeeder extends Seeder
      */
     public function run()
     {
-        Brand::factory(15)->create();
-        //
+        $allData=json_decode(
+            file_get_contents(base_path('database/brands.json')
+        ),true);
+
+        foreach ($allData as $brandJSON) {
+            $brand = new Brand();
+            $brand->wording = $brandJSON;
+            $brand->save();
+        }
     }
 }

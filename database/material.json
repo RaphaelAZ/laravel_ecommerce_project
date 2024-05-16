@@ -1,17 +1,7 @@
-{
-    "1": {
-        "wording": "Bois"
-    },
-    "2": {
-        "wording": "Métal"
-    },
-    "3": {
-        "wording": "Plastique"
-    },
-    "4": {
-        "wording": "Verre"
-    },
-    "5": {
-        "wording": "Céramique"
-    }
-}
+[
+    "Bois",
+    "Métal",
+    "Plastique",
+    "Verre",
+    "Céramique"
+]
