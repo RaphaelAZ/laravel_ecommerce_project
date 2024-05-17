@@ -17,7 +17,7 @@
     @if(!empty($name)) name="{{ $name }}" @endif
     @if(isset($required) && (bool)$required===true) required @endif
 >
-    @if($authoriseEmpty ?? false === true)
+    @if(($authoriseEmpty ?? true) === true)
         <option
             value="__none__"
             @if(isset($selected) && !array_key_exists($selected, $options))

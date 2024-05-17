@@ -4,8 +4,8 @@
 
         <img
             class="w-full mb-2"
-            src="{{ $product->image ?? 'placeholder.png' }}"
-            alt="no">
+            src="{{ asset($product->image ?? 'placeholder.png') }}"
+            alt="Image">
 
         <h3 class="font-bold text-xl mb-2">{{ $product->name }}</h3>
         <p class="text-gray-700 text-base">{{ mb_strimwidth($product->description, 0, 150, '...') }}</p>

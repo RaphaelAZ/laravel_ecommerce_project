@@ -11,7 +11,7 @@ use App\Helpers\Basket;
             class="col-start-1 col-end-2 w-full rounded-r-2xl overflow-hidden h-auto"
             id="main-photo"
             alt="hey"
-            src="{{ $product->image }}"
+            src="{{ asset($product->image) }}"
         >
 
         <div id="infos" class="col-start-2 col-end-3 flex flex-col">
