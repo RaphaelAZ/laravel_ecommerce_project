@@ -10,6 +10,7 @@ use App\Models\Product;
 use Exception;
 use Illuminate\Http\File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Throwable;
 
@@ -67,12 +68,17 @@ class ProductsManagementController extends Controller
             ]);
 
             $file = $request->file('file');
-            $fileName = $file->getClientOriginalName();
+            $fileName = $file->hashName();
+            $imagePath = "img/products/".$fileName;
+
+            $contents = file_get_contents($file);
+
+            file_put_contents(public_path()."/".$imagePath, $contents);
 
             $newProduct->name = $request->get('name');
             $newProduct->description = $request->get('description');
             $newProduct->stock = intval($request->get('stock'));
-            $newProduct->image = $fileName;
+            $newProduct->image = $imagePath;
             $newProduct->price = floatval($request->get('price'));
             $newProduct->height = intval($request->get('height'));
             $newProduct->length = intval($request->get('length'));
@@ -84,8 +90,16 @@ class ProductsManagementController extends Controller
             $newProduct->created_at = new \DateTime();
             $newProduct->updated_at = new \DateTime();
 
+
+            /*
+            $request->file('file')
+                ->storeAs('img/products', $fileName);
+
+            //Storage::put('img/products', new File($file), $fileName);
+            */
+
             // $file->storeAs('public/img/products/', $fileName);
-            
+
             $newProduct->save();
         } catch (Exception|Throwable $e) {} finally {
             return redirect()->back()->with('throwBack','L\'article a bien été créé.');
@@ -137,7 +151,7 @@ class ProductsManagementController extends Controller
 
             $product = Product::findOrFail($id);
             $product->delete();
-        } catch (Exception|Throwable $e) {} 
+        } catch (Exception|Throwable $e) {}
         finally {
             return redirect()->back()->with('throwBack','L\'article a bien été supprimé.');
         }
