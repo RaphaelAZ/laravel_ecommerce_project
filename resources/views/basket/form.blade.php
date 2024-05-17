@@ -8,6 +8,7 @@
     <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
         <div class="mx-auto max-w-5xl">
 
+
             @if(session()->has("coupon_state"))
                 @if(session('coupon_state'))
                     @include('components.alert', [
@@ -25,32 +26,30 @@
                 @php session()->remove('coupon_state') @endphp
             @endif
 
-            @if(!Basket::codeApplied())
-                <form
-                    method="POST"
-                    action="{{ route('basket.apply') }}"
-                    class="flex w-full h-fit my-8 items-end gap-x-4"
-                >
-                    @csrf
+            <form
+                method="POST"
+                action="{{ route('basket.apply') }}"
+                class="flex w-full h-fit my-8 items-end gap-x-4"
+            >
+                @csrf
 
-                    <!--container coupon code-->
-                    <div class="col-start-1 col-end-3">
-                        @include('components.input', [
-                            "id" => "coupon",
-                            "label" => "Coupon",
-                            "type" => "text",
-                            "name" => "coupon",
-                            "placeholder" => "Votre coupon"
-                        ])
-                    </div>
+                <!--container coupon code-->
+                <div class="col-start-1 col-end-3">
+                    @include('components.input', [
+                        "id" => "coupon",
+                        "label" => "Coupon",
+                        "type" => "text",
+                        "name" => "coupon",
+                        "placeholder" => "Votre coupon"
+                    ])
+                </div>
 
-                    <!--button submit-->
-                    <button class="btn btn-green flex">
-                        <iconify-icon icon="mdi:send"></iconify-icon>
-                        Envoyer
-                    </button>
-                </form>
-            @endif
+                <!--button submit-->
+                <button class="btn btn-green flex">
+                    <iconify-icon icon="mdi:send"></iconify-icon>
+                    Envoyer
+                </button>
+            </form>
 
             <h2 class="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">Paiement</h2>
 
