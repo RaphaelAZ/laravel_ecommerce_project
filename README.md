@@ -16,7 +16,7 @@ composer install --ignore-platform-reqs;
 echo "Installing Node modules...";
 npm install
 echo "Seeding database !";
-php artisan migrate --seed;
+php artisan migrate:fresh --seed;
 echo "Building the assets..."
 npm run production;
 echo "Serving Cursed Bazaar !"
